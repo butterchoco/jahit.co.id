@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.AddProjectViewModel
 import kotlinx.android.synthetic.main.navigation.*
 
 class TransitionFragment : Fragment() {
@@ -15,8 +14,6 @@ class TransitionFragment : Fragment() {
         fun newInstance() =
             TransitionFragment()
     }
-
-    private lateinit var viewModel: AddProjectViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

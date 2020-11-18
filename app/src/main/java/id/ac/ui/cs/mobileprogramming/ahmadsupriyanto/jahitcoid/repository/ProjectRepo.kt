@@ -37,7 +37,7 @@ class ProjectRepo(private val projectDao: ProjectDao) {
 
     private fun generateUuid(): String = UUID.randomUUID().toString()
 
-    fun deleteNote(note: ProjectDb) {
+    fun deleteProject(note: ProjectDb) {
         projectDao.delete(note)
     }
 
