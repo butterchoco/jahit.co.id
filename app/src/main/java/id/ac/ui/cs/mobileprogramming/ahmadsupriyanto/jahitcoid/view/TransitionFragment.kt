@@ -1,11 +1,11 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.TransitionViewModel
 import kotlinx.android.synthetic.main.navigation.*
@@ -28,7 +28,7 @@ class TransitionFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TransitionViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TransitionViewModel::class.java)
     }
 
     override fun onStart() {

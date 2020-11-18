@@ -6,25 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.Project
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectListViewModel
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.project_list_fragment.*
-import java.util.*
+import org.koin.android.architecture.ext.viewModel
 
 class ProjectListFragment : Fragment() {
     private lateinit var projectListAdapter: ProjectListAdapter;
-    private lateinit var projectList: LinkedList<Project>;
+    private lateinit var projectList: List<Project>;
 
     companion object {
         fun newInstance() =
             ProjectListFragment()
     }
 
-    private lateinit var viewModel: ProjectListViewModel
+    private lateinit var projectListViewModel: ProjectListViewModel
+    private val projectViewModel by viewModel<ProjectViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +40,10 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
-        projectList = viewModel.projectList;
-
+        projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
+        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                data -> projectList = data
+        })
     }
 
     override fun onStart() {

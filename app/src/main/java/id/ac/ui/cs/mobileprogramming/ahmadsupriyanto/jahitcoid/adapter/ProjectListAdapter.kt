@@ -13,10 +13,10 @@ import java.util.*
 
 class ProjectListAdapter(
     context: Context?,
-    projectList: LinkedList<Project>
+    projectList: List<Project>
 ) : RecyclerView.Adapter<ProjectListViewHolder>() {
 
-    private val projectList: LinkedList<Project>
+    private val projectList: List<Project>
     private val mInflater: LayoutInflater
 
     override fun onCreateViewHolder(
