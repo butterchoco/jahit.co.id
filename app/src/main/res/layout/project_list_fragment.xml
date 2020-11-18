@@ -24,10 +24,36 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/project_list_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:paddingBottom="72dp" >
             </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/project_list_noitem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak ada project untuk sekarang ini."
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"/>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_project_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_fab"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/red"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="96dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -22,11 +22,11 @@ class ProjectListAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ProjectListViewHolder {
-        val mItemView = mInflater.inflate(
+        val projectListItemView = mInflater.inflate(
             R.layout.project_list_item,
             parent, false
         )
-        return ProjectListViewHolder(mItemView, this)
+        return ProjectListViewHolder(projectListItemView, this)
     }
 
     override fun onBindViewHolder(
@@ -67,6 +67,5 @@ class ProjectListAdapter(
     init {
         mInflater = LayoutInflater.from(context)
         this.projectList = projectList
-        Log.d("TEST", projectList.toString())
     }
 }

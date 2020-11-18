@@ -2,7 +2,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/red</item>
         <item name="colorSecondary">@color/orange</item>
-        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
         <item name="colorAccent">@color/black</item>
     </style>
 </resources>

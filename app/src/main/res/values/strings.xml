@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">jahit.co.id</string>
     <string name="project_list_title">Proyek</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="project_add_greeting">Hi, Pelanggan Jahit.co.id!</string>
+    <string name="project_add_description">Silahkan lengkapi tabel di bawah ini untuk disebar ke 2000 partner jahit kami dan temukan vendor terbaik anda!</string>
+    <string name="project_add_project_name_field">Nama Proyek</string>
+    <string name="project_add_project_category_field">Ketegori</string>
+    <string name="project_add_project_amount_field">Jumlah Pesanan</string>
+    <string name="project_add_project_address_field">Alamat</string>
+    <string name="project_add_project_note_field">Catatan</string>
+    <string name="project_add_project_preview_field">Upload Gambar</string>
 </resources>
