@@ -2,10 +2,11 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main.ChoiceFragment
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main.ProjectListFragment
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main.TransitionFragment
-import kotlinx.android.synthetic.main.add_project_fragment.*
+import androidx.room.Room
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.AppDatabase
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ChoiceFragment
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListFragment
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.TransitionFragment
 import kotlinx.android.synthetic.main.choice_fragment.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,11 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "jahit-database"
+        ).build()
     }
 
     override fun onStart() {

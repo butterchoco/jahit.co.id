@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ChoiceViewModel
 
 class ChoiceFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ChoiceFragment()
+        fun newInstance() =
+            ChoiceFragment()
     }
 
     private lateinit var viewModel: ChoiceViewModel

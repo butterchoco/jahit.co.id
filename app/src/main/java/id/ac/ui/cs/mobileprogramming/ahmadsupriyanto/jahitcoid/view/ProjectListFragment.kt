@@ -1,22 +1,17 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Project
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ProjectListAdapter
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.Project
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.databinding.NavigationBinding
-import kotlinx.android.synthetic.main.choice_fragment.view.*
-import kotlinx.android.synthetic.main.navigation.*
-import kotlinx.android.synthetic.main.navigation.view.*
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectListViewModel
 import kotlinx.android.synthetic.main.project_list_fragment.*
 import java.util.*
 
@@ -25,7 +20,8 @@ class ProjectListFragment : Fragment() {
     private lateinit var projectList: LinkedList<Project>;
 
     companion object {
-        fun newInstance() = ProjectListFragment()
+        fun newInstance() =
+            ProjectListFragment()
     }
 
     private lateinit var viewModel: ProjectListViewModel
@@ -68,7 +64,11 @@ class ProjectListFragment : Fragment() {
     }
 
     fun initiateProjectListAdapter() {
-        projectListAdapter = ProjectListAdapter(activity, projectList);
+        projectListAdapter =
+            ProjectListAdapter(
+                activity,
+                projectList
+            );
         project_list_container.adapter = projectListAdapter;
         project_list_container.layoutManager = LinearLayoutManager(
             activity,

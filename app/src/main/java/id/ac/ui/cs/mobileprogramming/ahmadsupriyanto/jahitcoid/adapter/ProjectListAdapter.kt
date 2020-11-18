@@ -1,13 +1,14 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ProjectListAdapter.ProjectListViewHolder
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter.ProjectListViewHolder
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.Project
 import java.util.*
 
 class ProjectListAdapter(

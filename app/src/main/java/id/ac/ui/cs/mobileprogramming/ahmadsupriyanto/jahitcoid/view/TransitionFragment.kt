@@ -1,20 +1,20 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import kotlinx.android.synthetic.main.add_project_fragment.*
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.TransitionViewModel
 import kotlinx.android.synthetic.main.navigation.*
 
 class TransitionFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TransitionFragment()
+        fun newInstance() =
+            TransitionFragment()
     }
 
     private lateinit var viewModel: TransitionViewModel

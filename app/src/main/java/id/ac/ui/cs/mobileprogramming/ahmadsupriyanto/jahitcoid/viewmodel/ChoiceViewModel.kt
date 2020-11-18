@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.ui.main
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel
 
 import androidx.lifecycle.ViewModel
 
