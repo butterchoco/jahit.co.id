@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "jahit-database"
-        ).build()
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "jahit-database"
+//        ).build()
     }
 
     override fun onStart() {

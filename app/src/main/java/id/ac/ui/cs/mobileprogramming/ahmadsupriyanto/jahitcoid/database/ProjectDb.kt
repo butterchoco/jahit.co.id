@@ -1,14 +1,13 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository;
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database;
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.text.NumberFormat
-import java.util.*
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 
-@Entity
-data class Project (
-    @PrimaryKey(autoGenerate = true) var id: Int,
+@Entity(tableName = Constant.Table.PROJECT)
+data class ProjectDb (
+    @PrimaryKey var id: String,
     @ColumnInfo(name="project_name") val name: String?,
     @ColumnInfo(name="project_category") val category: String?,
     @ColumnInfo(name="project_price") val price: String?,

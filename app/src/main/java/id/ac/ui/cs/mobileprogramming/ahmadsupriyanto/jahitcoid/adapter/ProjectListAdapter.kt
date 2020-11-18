@@ -8,15 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter.ProjectListViewHolder
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.Project
-import java.util.*
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 
 class ProjectListAdapter(
     context: Context?,
-    projectList: List<Project>
+    projectList: List<ProjectDb>
 ) : RecyclerView.Adapter<ProjectListViewHolder>() {
 
-    private val projectList: List<Project>
+    private val projectList: List<ProjectDb>
     private val mInflater: LayoutInflater
 
     override fun onCreateViewHolder(

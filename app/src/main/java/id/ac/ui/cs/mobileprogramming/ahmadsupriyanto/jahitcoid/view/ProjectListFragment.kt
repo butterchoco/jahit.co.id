@@ -5,20 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.Project
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectListViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.project_list_fragment.*
+import org.koin.android.architecture.ext.viewModel
+import java.util.*
 
 class ProjectListFragment : Fragment() {
-    private lateinit var projectListAdapter: ProjectListAdapter;
-    private lateinit var projectList: List<Project>;
+    private lateinit var projectListAdapter: ProjectListAdapter
+    private var projectList: List<ProjectDb> = listOf()
 
     companion object {
         fun newInstance() =
@@ -26,7 +28,7 @@ class ProjectListFragment : Fragment() {
     }
 
     private lateinit var projectListViewModel: ProjectListViewModel
-    private val projectViewModel by viewModels<ProjectViewModel>()
+    private val projectViewModel by viewModel<ProjectViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,15 +40,15 @@ class ProjectListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
-        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer<List<Project>> {
+        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer<List<ProjectDb>> {
             data -> projectList = data
         })
     }
 
     override fun onStart() {
-        super.onStart();
-        checkProjectListVisibility();
-        initiateProjectListAdapter();
+        super.onStart()
+        checkProjectListVisibility()
+        initiateProjectListAdapter()
 
         add_project_button.setOnClickListener{
             activity?.supportFragmentManager?.beginTransaction()
@@ -58,11 +60,11 @@ class ProjectListFragment : Fragment() {
 
     fun checkProjectListVisibility() {
         if (projectList.isEmpty()) {
-            project_list_container.visibility = View.GONE;
-            project_list_noitem.visibility = View.VISIBLE;
+            project_list_container.visibility = View.GONE
+            project_list_noitem.visibility = View.VISIBLE
         } else {
-            project_list_container.visibility = View.VISIBLE;
-            project_list_noitem.visibility = View.GONE;
+            project_list_container.visibility = View.VISIBLE
+            project_list_noitem.visibility = View.GONE
         }
     }
 
@@ -71,11 +73,11 @@ class ProjectListFragment : Fragment() {
             ProjectListAdapter(
                 activity,
                 projectList
-            );
-        project_list_container.adapter = projectListAdapter;
+            )
+        project_list_container.adapter = projectListAdapter
         project_list_container.layoutManager = LinearLayoutManager(
             activity,
             RecyclerView.VERTICAL, false
-        );
+        )
     }
 }
