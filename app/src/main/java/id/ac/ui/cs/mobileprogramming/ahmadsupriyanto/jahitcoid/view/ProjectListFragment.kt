@@ -5,18 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectListViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.project_list_fragment.*
 import org.koin.android.architecture.ext.viewModel
-import java.util.*
 
 class ProjectListFragment : Fragment() {
     private lateinit var projectListAdapter: ProjectListAdapter
@@ -27,7 +24,6 @@ class ProjectListFragment : Fragment() {
             ProjectListFragment()
     }
 
-    private lateinit var projectListViewModel: ProjectListViewModel
     private val projectViewModel by viewModel<ProjectViewModel>()
 
     override fun onCreateView(
@@ -39,7 +35,6 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        projectListViewModel = ViewModelProvider(this).get(ProjectListViewModel::class.java)
         projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer<List<ProjectDb>> {
             data -> projectList = data
         })
