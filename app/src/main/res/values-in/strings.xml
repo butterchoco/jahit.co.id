@@ -25,4 +25,7 @@
     <string name="project_detail_title_end_date">Selesai Pengerjaan</string>
     <string name="project_detail_title_address">Alamat</string>
     <string name="project_detail_title_note">Catatan</string>
+    <string name="title_project">Project</string>
+    <string name="title_transaction">Transaction</string>
+    <string name="title_chat">Chat</string>
 </resources>

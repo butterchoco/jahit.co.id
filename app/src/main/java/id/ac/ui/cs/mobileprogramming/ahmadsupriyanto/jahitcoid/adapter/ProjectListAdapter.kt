@@ -53,6 +53,10 @@ class ProjectListAdapter : ListAdapter<ProjectDb, ProjectListViewHolder>(Project
         this.listener = listener
     }
 
+    fun getProjectList(): MutableList<ProjectDb> {
+        return projectList
+    }
+
     class ProjectListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var projectId:MaterialCardView = itemView.findViewById(R.id.project_card)
         private var projectName: TextView = itemView.findViewById(R.id.project_name)

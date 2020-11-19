@@ -1,43 +1,30 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.AppDatabase
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ChoiceFragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListFragment
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.TransitionFragment
-import kotlinx.android.synthetic.main.choice_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.container, ChoiceFragment.newInstance(), "CHOICE_FRAGMENT")
-                .addToBackStack(null)
-                .commit()
-        }
-    }
+        setContentView(R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-    override fun onStart() {
-        super.onStart()
-        customerChoice.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, TransitionFragment.newInstance(), "MAIN_FRAGMENT")
-                .add(
-                    R.id.transition_container,
-                    ProjectListFragment.newInstance(),
-                    "PROJECT_FRAGMENT"
-                )
-                .commitNow()
-        }
+        val navController = findNavController(R.id.nav_host_fragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_project, R.id.navigation_transaction, R.id.navigation_chat
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
-
 }

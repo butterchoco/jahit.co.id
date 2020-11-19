@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">jahit.co.id</string>
+    <string name="app_name">Jahit</string>
     <string name="project_choice_greeting">Welcome to Jahit.co.id</string>
     <string name="project_choice_title">What do you want to be in Jahit.co.id?</string>
     <string name="project_choice_customer_description">Customer who wants assign a sewing project</string>
@@ -25,4 +25,7 @@
     <string name="project_detail_title_end_date">End Date</string>
     <string name="project_detail_title_address">Address</string>
     <string name="project_detail_title_note">Note</string>
+    <string name="title_project">Proyek</string>
+    <string name="title_transaction">Transaksi</string>
+    <string name="title_chat">Pesan</string>
 </resources>

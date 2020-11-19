@@ -13,10 +13,6 @@ class AddProjectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project_fragment)
 
-        back_button.setOnClickListener {
-            finish()
-        }
-
         save_project_button.setOnClickListener {
             val replyIntent = Intent()
             if (!isFormValidated()) {

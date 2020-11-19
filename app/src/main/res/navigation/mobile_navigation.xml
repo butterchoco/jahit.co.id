@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_project">
+
+    <fragment
+        android:id="@+id/navigation_project"
+        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListTransitionFragment"
+        android:label="@string/title_project"
+        tools:layout="@layout/project_list_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_transaction"
+        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.TransactionFragment"
+        android:label="@string/title_transaction"
+        tools:layout="@layout/transaction_list_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ChatListFragment"
+        android:label="@string/title_chat"
+        tools:layout="@layout/chat_list_fragment" />
+</navigation>
