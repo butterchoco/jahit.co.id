@@ -1,11 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter.ProjectListViewHolder
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
@@ -34,6 +36,10 @@ class ProjectListAdapter(
         position: Int
     ) {
         val project = projectList[position]
+        holder.projectId.setOnClickListener { it ->
+            Log.d("--------------", it.tag.toString())
+        }
+        holder.projectId.tag = project.id
         holder.projectName.setText(project.name);
         holder.projectPrice.setText(project.price);
         holder.projectAmount.setText(project.amount);
@@ -49,6 +55,7 @@ class ProjectListAdapter(
         itemView: View,
         val mAdapter: ProjectListAdapter
     ) : RecyclerView.ViewHolder(itemView) {
+        val projectId: MaterialCardView
         var projectName: TextView
         val projectPrice: TextView
         val projectAmount: TextView
@@ -56,6 +63,7 @@ class ProjectListAdapter(
         val projectAnnotation: TextView
 
         init {
+            projectId = itemView.findViewById(R.id.project_card)
             projectName = itemView.findViewById(R.id.project_name)
             projectPrice = itemView.findViewById(R.id.project_price)
             projectAmount = itemView.findViewById(R.id.project_amount)

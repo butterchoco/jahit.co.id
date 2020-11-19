@@ -3,6 +3,7 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.project_list_fragment.*
+import kotlinx.android.synthetic.main.project_list_item.*
 import org.koin.android.architecture.ext.viewModel
 
 class ProjectListFragment : Fragment() {
@@ -35,8 +37,7 @@ class ProjectListFragment : Fragment() {
         projectViewModel.listenProjectsResult().observe(this, Observer { data ->
             data?.let {
                 projectList = data
-                initiateProjectListAdapter()
-                checkProjectListVisibility()
+                initProjectList()
             }
         })
     }
@@ -52,10 +53,6 @@ class ProjectListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initiateProjectListAdapter()
         checkProjectListVisibility()
-        add_project_button.setOnClickListener{
-            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
-            startActivityForResult(addProjectIntent, 1)
-        }
     }
 
     override fun onStart() {
@@ -99,5 +96,14 @@ class ProjectListFragment : Fragment() {
             activity,
             RecyclerView.VERTICAL, false
         )
+    }
+
+    fun initProjectList() {
+        initiateProjectListAdapter()
+        checkProjectListVisibility()
+        add_project_button.setOnClickListener{
+            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
+            startActivityForResult(addProjectIntent, 1)
+        }
     }
 }
