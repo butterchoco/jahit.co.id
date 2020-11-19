@@ -29,10 +29,10 @@
                 android:paddingBottom="72dp" >
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
-                android:id="@+id/project_list_noitem"
+                android:id="@+id/project_list_no_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tidak ada project untuk sekarang ini."
+                android:text="@string/project_list_no_item_text"
                 android:textColor="@color/black"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"/>

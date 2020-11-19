@@ -22,7 +22,7 @@ class AddProjectActivity : AppCompatActivity() {
             if (!isFormValidated()) {
                 Toast.makeText(
                     applicationContext,
-                    R.string.project_add_project_empty_field_message,
+                    R.string.project_add_empty_field_message,
                     Toast.LENGTH_LONG).show()
             } else {
                 replyIntent.putExtra("project_name", add_project_name.text.toString())

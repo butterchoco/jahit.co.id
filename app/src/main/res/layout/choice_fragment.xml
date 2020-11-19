@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/raleway"
-            android:text="Selamat Datang di Jahit.co.id"
+            android:text="@string/project_choice_greeting"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/raleway_bold"
-            android:text="Sebagai apa kamu di Jahit.co.id ?"
+            android:text="@string/project_choice_title"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -81,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/raleway"
-                            android:text="Pelanggan yang ingin mengajukan proyek jahit"
+                            android:text="@string/project_choice_customer_description"
                             android:textAlignment="center"
                             android:textColor="#000000" />
                     </LinearLayout>
@@ -118,7 +118,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/raleway"
-                            android:text="Vendor penjahit yang ingin menjadi mitra Jahit.co.id"
+                            android:text="@string/project_choice_partner_description"
                             android:textAlignment="center"
                             android:textColor="#000000" />
                     </LinearLayout>
