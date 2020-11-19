@@ -8,55 +8,66 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
+import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.AddProjectActivity
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModelFactory
 import kotlinx.android.synthetic.main.project_list_fragment.*
 import kotlinx.android.synthetic.main.project_list_item.*
 import org.koin.android.architecture.ext.viewModel
 
-class ProjectListFragment : Fragment() {
+interface OnProjectClickListener {
+    fun onProjectClick();
+}
+
+class ProjectListFragment : Fragment(), OnProjectClickListener {
     private lateinit var projectListAdapter: ProjectListAdapter
-    private var projectList: List<ProjectDb> = listOf()
 
     companion object {
         fun newInstance() =
             ProjectListFragment()
     }
 
-    private val projectViewModel by viewModel<ProjectViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        projectViewModel.listenProjectsResult().observe(this, Observer { data ->
-            data?.let {
-                projectList = data
-                initProjectList()
-            }
-        })
+    private val projectViewModel: ProjectViewModel by viewModels {
+        ProjectViewModelFactory((activity?.application as MainApp).repository)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.project_list_fragment, container, false)
-    }
+        val projectListView = inflater.inflate(R.layout.project_list_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initiateProjectListAdapter()
-        checkProjectListVisibility()
-    }
+        projectListAdapter = ProjectListAdapter()
+        projectListAdapter.setListener(this)
+        val recycler: RecyclerView = projectListView.findViewById(R.id.project_list_container)
+        recycler.adapter = projectListAdapter
+        recycler.layoutManager = LinearLayoutManager(
+            activity,
+            RecyclerView.VERTICAL, false
+        )
+        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer { data ->
+            data?.let {
+                projectListAdapter.addProjectToList(it)
+            }
+        })
 
-    override fun onStart() {
-        super.onStart()
+        projectListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
+            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
+            startActivityForResult(addProjectIntent, 1)
+        }
+
+        return projectListView
     }
 
     private val newWordActivityRequestCode = 1
@@ -75,35 +86,14 @@ class ProjectListFragment : Fragment() {
         }
     }
 
-    private fun checkProjectListVisibility() {
-        if (projectList.isEmpty()) {
-            project_list_container.visibility = View.GONE
-            project_list_noitem.visibility = View.VISIBLE
-        } else {
-            project_list_container.visibility = View.VISIBLE
-            project_list_noitem.visibility = View.GONE
-        }
-    }
-
-    private fun initiateProjectListAdapter() {
-        projectListAdapter =
-            ProjectListAdapter(
-                activity,
-                projectList
+    override fun onProjectClick() {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(
+                R.id.transition_container,
+                ProjectDetailFragment.newInstance(),
+                "PROJECT_DETAIL_FRAGMENT"
             )
-        project_list_container.adapter = projectListAdapter
-        project_list_container.layoutManager = LinearLayoutManager(
-            activity,
-            RecyclerView.VERTICAL, false
-        )
-    }
-
-    fun initProjectList() {
-        initiateProjectListAdapter()
-        checkProjectListVisibility()
-        add_project_button.setOnClickListener{
-            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
-            startActivityForResult(addProjectIntent, 1)
-        }
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

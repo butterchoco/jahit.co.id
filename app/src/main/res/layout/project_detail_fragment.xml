@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ProjectDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingBottom="72dp" >
+
+    <ImageView
+        android:id="@+id/project_detail_preview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+            <TextView
+                android:id="@+id/project_detail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp.123.000"
+                android:textColor="@color/red"
+                android:fontFamily="@font/raleway_bold"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/project_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rompi Relawawan COVID"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway_medium"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/project_detail_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13.000 buah"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Informasi Proyek"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway_bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kategori"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/project_detail_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Seragam Putih"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="16dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah Penawaran"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/project_detail_quotation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="8 penawaran"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="16dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vendor"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/project_detail_vendor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Qwerty Visual"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mulai Pengerjaan"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/project_detail_start_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10 Maret 2020"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="16dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selesai Pengerjaan"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/project_detail_end_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="20 Maret 2020"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="16dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway_bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/project_detail_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jalan Sukamaju 2 Blok S6 No. 13 RT 009/RW 020 Tapos, Depok, Jawa Barat, Indonesia"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway"
+                android:textSize="16sp"
+                android:paddingVertical="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Catatan"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway_bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                    android:id="@+id/project_detail_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway"
+                    android:textSize="16sp"
+                    android:paddingVertical="5dp" />
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

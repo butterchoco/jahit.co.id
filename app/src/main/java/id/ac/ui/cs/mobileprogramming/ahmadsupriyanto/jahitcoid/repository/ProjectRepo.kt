@@ -30,7 +30,7 @@ class ProjectRepo(private val projectDao: ProjectDao) {
         projectDao.insertAll(projectDb)
     }
 
-    fun getAll(): Flow<List<ProjectDb>> {
+    fun getAll(): Flow<MutableList<ProjectDb>> {
         return projectDao.getAll()
     }
 

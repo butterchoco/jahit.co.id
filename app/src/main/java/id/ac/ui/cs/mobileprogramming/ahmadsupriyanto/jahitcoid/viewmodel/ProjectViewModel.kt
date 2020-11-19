@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
 
 class ProjectViewModel(private val projectRepo: ProjectRepo) : ViewModel() {
-    var projectList: LiveData<List<ProjectDb>> = projectRepo.getAll().asLiveData()
+    var projectList: LiveData<MutableList<ProjectDb>> = projectRepo.getAll().asLiveData()
 
     fun saveProject(
             name: String,
@@ -30,8 +30,18 @@ class ProjectViewModel(private val projectRepo: ProjectRepo) : ViewModel() {
         projectRepo.deleteProject(project)
     }
 
-    fun listenProjectsResult(): LiveData<List<ProjectDb>> {
+    fun listenProjectsResult(): LiveData<MutableList<ProjectDb>> {
         return projectList
     }
 
+}
+
+class ProjectViewModelFactory(private val repository: ProjectRepo) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ProjectViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return ProjectViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }

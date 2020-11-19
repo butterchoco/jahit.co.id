@@ -9,6 +9,7 @@
         android:layout_marginVertical="5dp"
         android:backgroundTint="@color/white"
         app:cardElevation="5dp"
+        app:rippleColor="@color/red"
         android:id="@+id/project_card">
 
         <FrameLayout

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ProjectDao {
     @Query("SELECT * FROM project_table")
-    fun getAll(): Flow<List<ProjectDb>>
+    fun getAll(): Flow<MutableList<ProjectDb>>
 
     @Query("SELECT * FROM project_table WHERE project_name LIKE :name LIMIT 1")
     fun findByName(name: String): ProjectDb
@@ -17,4 +17,5 @@ interface ProjectDao {
 
     @Delete
     suspend fun delete(project: ProjectDb)
+
 }
