@@ -1,6 +1,10 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.AppDatabase
@@ -20,11 +24,6 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         }
-
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "jahit-database"
-//        ).build()
     }
 
     override fun onStart() {
@@ -40,4 +39,5 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
 }

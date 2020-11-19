@@ -27,7 +27,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_medium"
-                    android:text="Rompi Relawan"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -35,7 +34,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway_bold"
-                    android:text="Rp. 1.300.000"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -43,7 +41,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway"
-                    android:text="13.000 buah"
                     android:textColor="@color/black" />
 
             </LinearLayout>
@@ -61,7 +58,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/grey"
-                    android:text="Mengirimkan Sample"
                     android:textColor="@color/black"
                     app:chipCornerRadius="5dp" />
 
@@ -70,7 +66,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/raleway"
-                        android:text="13 quotation"
                         android:textColor="@color/black" />
 
             </LinearLayout>

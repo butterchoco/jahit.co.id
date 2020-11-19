@@ -1,13 +1,17 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.AddProjectActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
@@ -26,6 +30,17 @@ class ProjectListFragment : Fragment() {
 
     private val projectViewModel by viewModel<ProjectViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        projectViewModel.listenProjectsResult().observe(this, Observer { data ->
+            data?.let {
+                projectList = data
+                initiateProjectListAdapter()
+                checkProjectListVisibility()
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,25 +50,35 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer<List<ProjectDb>> {
-            data -> projectList = data
-        })
+        initiateProjectListAdapter()
+        checkProjectListVisibility()
+        add_project_button.setOnClickListener{
+            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
+            startActivityForResult(addProjectIntent, 1)
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        checkProjectListVisibility()
-        initiateProjectListAdapter()
+    }
 
-        add_project_button.setOnClickListener{
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, AddProjectFragment.newInstance(), "MAIN_FRAGMENT")
-                ?.addToBackStack(null)
-                ?.commit()
+    private val newWordActivityRequestCode = 1
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            if (!data?.extras?.isEmpty!!) {
+                projectViewModel.saveProject(data.getStringExtra("project_name"),
+                data.getStringExtra("project_category"),
+                data.getStringExtra("project_amount"),
+                data.getStringExtra("project_address"),
+                data.getStringExtra("project_note"),
+                data.getStringExtra("project_preview"))
+            }
         }
     }
 
-    fun checkProjectListVisibility() {
+    private fun checkProjectListVisibility() {
         if (projectList.isEmpty()) {
             project_list_container.visibility = View.GONE
             project_list_noitem.visibility = View.VISIBLE
@@ -63,7 +88,7 @@ class ProjectListFragment : Fragment() {
         }
     }
 
-    fun initiateProjectListAdapter() {
+    private fun initiateProjectListAdapter() {
         projectListAdapter =
             ProjectListAdapter(
                 activity,

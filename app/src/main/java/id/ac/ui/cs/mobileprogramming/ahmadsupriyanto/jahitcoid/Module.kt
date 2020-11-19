@@ -7,9 +7,6 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.Project
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.applicationContext
 
-/**
- * Created by wisnu on 8/7/18
- */
 val projectModule = applicationContext {
 
     // Create Database
@@ -32,7 +29,7 @@ val projectModule = applicationContext {
         )
     }
 
-    // Create NoteViewModel
+    // Create ProjectViewModel
     viewModel { ProjectViewModel(get()) }
 
 }

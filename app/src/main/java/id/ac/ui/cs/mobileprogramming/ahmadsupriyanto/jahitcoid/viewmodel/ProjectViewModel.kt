@@ -1,65 +1,37 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.dao.ProjectDao
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.ProjectRepo
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
 
 class ProjectViewModel(private val projectRepo: ProjectRepo) : ViewModel() {
-    private lateinit var project: LiveData<List<ProjectDb>>;
-
-    init {
-        subscribeProjectResult()
-    }
+    var projectList: LiveData<List<ProjectDb>> = projectRepo.getAll().asLiveData()
 
     fun saveProject(
             name: String,
             category: String,
-            price: String,
             amount: String,
             address: String,
             note: String,
-            preview: String,
-            status: String,
-            annotation: String
-    ) {
+            preview: String
+    ) = viewModelScope.launch {
         projectRepo.saveProject(name,
             category,
-            price,
             amount,
             address,
             note,
-            preview,
-            status,
-            annotation)
+            preview)
     }
 
-    fun deleteProject(project: ProjectDb) {
+    suspend fun deleteProject(project: ProjectDb) {
         projectRepo.deleteProject(project)
     }
 
     fun listenProjectsResult(): LiveData<List<ProjectDb>> {
-        return project
+        return projectList
     }
 
-    private fun subscribeProjectResult() {
-        project = Transformations.map(projectRepo.getAll()) {
-            data -> data.reversed().map { it ->
-            ProjectDb(
-                it.id,
-                it.name,
-                it.category,
-                it.price,
-                it.amount,
-                it.address,
-                it.note,
-                it.preview,
-                it.status,
-                it.annotation
-            )
-            }
-        }
-    }
 }

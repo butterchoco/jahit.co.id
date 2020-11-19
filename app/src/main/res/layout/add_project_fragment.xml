@@ -185,9 +185,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_project_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selanjutnya"
+        android:text="Tambah Proyek"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:layout_gravity="end"

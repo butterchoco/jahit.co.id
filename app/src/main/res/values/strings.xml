@@ -9,4 +9,5 @@
     <string name="project_add_project_address_field">Alamat</string>
     <string name="project_add_project_note_field">Catatan</string>
     <string name="project_add_project_preview_field">Upload Gambar</string>
+    <string name="project_add_project_empty_field_message">Mohon isi form dengan lengkap!</string>
 </resources>
