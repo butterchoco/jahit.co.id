@@ -1,12 +1,23 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.media.ThumbnailUtils
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.decodeBitmap
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import kotlinx.android.synthetic.main.project_detail_fragment.*
+import java.io.File
+import java.io.IOException
 
 class ProjectDetailFragment : Fragment() {
 
@@ -36,8 +47,17 @@ class ProjectDetailFragment : Fragment() {
                 project_detail_end_date.text = bundle.getString("project_endDate")
                 project_detail_address.text = bundle.getString("project_address")
                 project_detail_note.text = bundle.getString("project_note")
+                Log.d("--------------------",bundle.getString("project_preview"))
+                val selectedImage: Bitmap? = loadFromUri(bundle.getString("project_preview").toString());
+                project_detail_preview.setImageBitmap(selectedImage);
         }
+    }
 
+    fun loadFromUri(photoUri: String): Bitmap? {
+        var image: Bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver()!!, Uri.parse(photoUri));
+         val bitmap = ThumbnailUtils.extractThumbnail(image,240,240);
+
+        return bitmap
     }
 
 }

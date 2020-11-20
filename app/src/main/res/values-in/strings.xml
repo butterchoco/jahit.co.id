@@ -31,4 +31,5 @@
     <string name="double_back_pressed_warning">Tekan kembali lagi untuk keluar</string>
     <string name="project_add_notification_title">Pelanggan baru saja menambahkan proyek</string>
     <string name="project_add_notification_content">Yuk kita lihat dan buat penawaran!</string>
+    <string name="yes">Ya</string>
 </resources>
