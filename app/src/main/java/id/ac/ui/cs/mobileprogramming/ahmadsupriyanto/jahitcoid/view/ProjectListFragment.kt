@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,10 +20,9 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectLi
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModelFactory
-import kotlinx.android.synthetic.main.project_list_fragment.*
 
 interface OnProjectClickListener {
-    fun onProjectClick();
+    fun onProjectClick(it: View);
 }
 
 class ProjectListFragment : Fragment(), OnProjectClickListener {
@@ -37,12 +37,12 @@ class ProjectListFragment : Fragment(), OnProjectClickListener {
         ProjectViewModelFactory((activity?.application as MainApp).repository)
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val projectListView = inflater.inflate(R.layout.project_list_fragment, container, false)
-
         projectListAdapter = ProjectListAdapter()
         projectListAdapter.setListener(this)
         val recycler: RecyclerView = projectListView.findViewById(R.id.project_list_container)
@@ -89,13 +89,33 @@ class ProjectListFragment : Fragment(), OnProjectClickListener {
         }
     }
 
-    override fun onProjectClick() {
+    override fun onProjectClick(it: View) {
+        val project = projectListAdapter.getProjectList().find { data ->
+            data.id == it.tag.toString()
+        }
+        val bundle: Bundle = Bundle()
+        if (project != null) {
+            bundle.putString("project_price", project.price)
+            bundle.putString("project_name", project.name)
+            bundle.putString("project_category", project.category)
+            bundle.putString("project_amount", project.amount)
+            bundle.putString("project_address", project.address)
+            bundle.putString("project_note", project.note)
+            bundle.putString("project_preview", project.preview)
+            bundle.putString("project_quotation", project.quotation)
+            bundle.putString("project_vendor", project.vendor)
+            bundle.putString("project_startDate", project.startDate)
+            bundle.putString("project_endDate", project.endDate)
+        }
+        val projectDetailFragment: ProjectDetailFragment = ProjectDetailFragment.newInstance()
+        projectDetailFragment.arguments = bundle
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(
                 R.id.project_list_transition,
-                ProjectDetailFragment.newInstance(),
+                projectDetailFragment,
                 "PROJECT_DETAIL_FRAGMENT"
             )
-            ?.commitNow()
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

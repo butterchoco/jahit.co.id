@@ -26,7 +26,11 @@ class ProjectRepo(private val projectDao: ProjectDao) {
             note=note,
             preview=preview,
             status="PENAWARAN_TERBUKA",
-            annotation="Chat dengan kami")
+            annotation="Chat dengan kami",
+            vendor = "",
+            quotation = "",
+            startDate = "",
+            endDate = "")
         projectDao.insertAll(projectDb)
     }
 

@@ -25,7 +25,7 @@
     <string name="project_detail_title_end_date">End Date</string>
     <string name="project_detail_title_address">Address</string>
     <string name="project_detail_title_note">Note</string>
-    <string name="title_project">Proyek</string>
-    <string name="title_transaction">Transaksi</string>
-    <string name="title_chat">Pesan</string>
+    <string name="title_project">Project</string>
+    <string name="title_transaction">Transaction</string>
+    <string name="title_chat">Chat</string>
 </resources>

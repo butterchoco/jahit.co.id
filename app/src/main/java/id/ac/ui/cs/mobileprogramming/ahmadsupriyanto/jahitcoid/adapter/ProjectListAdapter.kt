@@ -35,7 +35,7 @@ class ProjectListAdapter : ListAdapter<ProjectDb, ProjectListViewHolder>(Project
         holder.bind(project)
         holder.itemView.setOnClickListener {
             if (listener != null) {
-                listener.onProjectClick()
+                listener.onProjectClick(it)
             }
         }
     }

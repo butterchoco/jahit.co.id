@@ -15,6 +15,10 @@ data class ProjectDb (
     @ColumnInfo(name="project_address") val address: String?,
     @ColumnInfo(name="project_note") val note: String?,
     @ColumnInfo(name="project_preview") val preview: String?,
+    @ColumnInfo(name="project_quotation") val quotation: String?,
+    @ColumnInfo(name="project_vendor") val vendor: String?,
+    @ColumnInfo(name="project_start_date") val startDate: String?,
+    @ColumnInfo(name="project_end_date") val endDate: String?,
     @ColumnInfo(name="project_status") val status: String?,
     @ColumnInfo(name="project_annotation") val annotation: String?
 )

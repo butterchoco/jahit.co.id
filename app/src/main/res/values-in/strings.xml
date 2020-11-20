@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">jahit.co.id</string>
+    <string name="app_name">Jahit</string>
     <string name="project_choice_greeting">Selamat Datang di Jahit.co.id</string>
     <string name="project_choice_title">Sebagai apa kamu di Jahit.co.id</string>
     <string name="project_choice_customer_description">Pelanggan yang ingin mengajukan proyek jahit</string>
@@ -25,7 +25,7 @@
     <string name="project_detail_title_end_date">Selesai Pengerjaan</string>
     <string name="project_detail_title_address">Alamat</string>
     <string name="project_detail_title_note">Catatan</string>
-    <string name="title_project">Project</string>
-    <string name="title_transaction">Transaction</string>
-    <string name="title_chat">Chat</string>
+    <string name="title_project">Proyek</string>
+    <string name="title_transaction">Transaksi</string>
+    <string name="title_chat">Pesan</string>
 </resources>
