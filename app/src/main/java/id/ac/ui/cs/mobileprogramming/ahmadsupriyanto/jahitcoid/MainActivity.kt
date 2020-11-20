@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity() {
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle(applicationContext.resources.getString(R.string.project_add_notification_title))
                             .setContentText(applicationContext.resources.getString(R.string.project_add_notification_content))
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setDefaults(NotificationCompat.DEFAULT_ALL)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH)
         val notifId = projectId.replace("[^\\d.]".toRegex(), "").substring(0,4)
         with(NotificationManagerCompat.from(this)) {
             notify(notifId.toInt(), builder.build())
