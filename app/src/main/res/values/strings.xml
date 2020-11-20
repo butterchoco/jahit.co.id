@@ -28,4 +28,5 @@
     <string name="title_project">Project</string>
     <string name="title_transaction">Transaction</string>
     <string name="title_chat">Chat</string>
+    <string name="double_back_pressed_warning">Press back again to exit</string>
 </resources>

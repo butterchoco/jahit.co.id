@@ -1,8 +1,12 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.HandlerCompat
+import androidx.core.os.HandlerCompat.postDelayed
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -10,6 +14,8 @@ import androidx.navigation.ui.setupWithNavController
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListFragment
 
 class MainActivity : AppCompatActivity() {
+
+    var doubleBackToExit: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,5 +30,15 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onBackPressed() {
+        if (doubleBackToExit) {
+            finishAffinity()
+            return
+        }
+        this.doubleBackToExit = true
+        Toast.makeText(this, R.string.double_back_pressed_warning, Toast.LENGTH_SHORT).show()
+        Handler().postDelayed(Runnable { doubleBackToExit = false }, 2000)
     }
 }

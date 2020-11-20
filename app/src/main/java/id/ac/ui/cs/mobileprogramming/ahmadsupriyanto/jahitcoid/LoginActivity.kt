@@ -13,9 +13,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, ChoiceFragment.newInstance(), "CHOICE_FRAGMENT")
-                .addToBackStack(null)
-                .commit()
+                .replace(R.id.container, ChoiceFragment.newInstance(), "CHOICE_FRAGMENT")
+                .commitNow()
         }
     }
 
