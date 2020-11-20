@@ -29,4 +29,6 @@
     <string name="title_transaction">Transaction</string>
     <string name="title_chat">Chat</string>
     <string name="double_back_pressed_warning">Press back again to exit</string>
+    <string name="project_add_notification_title">Customer has just added new project</string>
+    <string name="project_add_notification_content">Let\'s see and make a quotation!</string>
 </resources>

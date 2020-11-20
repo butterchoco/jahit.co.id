@@ -8,15 +8,17 @@ import java.util.*
 
 class ProjectRepo(private val projectDao: ProjectDao) {
 
-    suspend fun saveProject(
-            name: String,
+    suspend fun saveProject(projectDb: ProjectDb) {
+        projectDao.insertAll(projectDb)
+    }
+
+    fun generateProject(name: String,
             category: String,
             amount: String,
             address: String,
             note: String,
-            preview: String
-    ) {
-        val projectDb = ProjectDb(
+            preview: String): ProjectDb {
+        return ProjectDb(
             id=generateUuid(),
             name=name,
             category=category,
@@ -31,7 +33,6 @@ class ProjectRepo(private val projectDao: ProjectDao) {
             quotation = "",
             startDate = "",
             endDate = "")
-        projectDao.insertAll(projectDb)
     }
 
     fun getAll(): Flow<MutableList<ProjectDb>> {

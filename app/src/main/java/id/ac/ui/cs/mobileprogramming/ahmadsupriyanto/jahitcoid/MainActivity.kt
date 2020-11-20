@@ -2,15 +2,19 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.HandlerCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -40,5 +44,17 @@ class MainActivity : AppCompatActivity() {
         this.doubleBackToExit = true
         Toast.makeText(this, R.string.double_back_pressed_warning, Toast.LENGTH_SHORT).show()
         Handler().postDelayed(Runnable { doubleBackToExit = false }, 2000)
+    }
+
+    fun projectAddNotification(projectId: String) {
+        var builder = NotificationCompat.Builder(this, projectId)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle(applicationContext.resources.getString(R.string.project_add_notification_title))
+                            .setContentText(applicationContext.resources.getString(R.string.project_add_notification_content))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val notifId = projectId.replace("[^\\d.]".toRegex(), "").substring(0,4)
+        with(NotificationManagerCompat.from(this)) {
+            notify(notifId.toInt(), builder.build())
+        }
     }
 }

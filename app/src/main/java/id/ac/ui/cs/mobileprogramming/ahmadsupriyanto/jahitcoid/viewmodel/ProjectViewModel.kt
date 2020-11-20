@@ -10,20 +10,17 @@ import kotlinx.coroutines.launch
 class ProjectViewModel(private val projectRepo: ProjectRepo) : ViewModel() {
     var projectList: LiveData<MutableList<ProjectDb>> = projectRepo.getAll().asLiveData()
 
-    fun saveProject(
-            name: String,
+    fun saveProject(projectDb: ProjectDb) = viewModelScope.launch {
+        projectRepo.saveProject(projectDb)
+    }
+
+    fun generateProject(name: String,
             category: String,
             amount: String,
             address: String,
             note: String,
-            preview: String
-    ) = viewModelScope.launch {
-        projectRepo.saveProject(name,
-            category,
-            amount,
-            address,
-            note,
-            preview)
+            preview: String): ProjectDb {
+        return projectRepo.generateProject(name, category, amount, address, note, preview)
     }
 
     suspend fun deleteProject(project: ProjectDb) {

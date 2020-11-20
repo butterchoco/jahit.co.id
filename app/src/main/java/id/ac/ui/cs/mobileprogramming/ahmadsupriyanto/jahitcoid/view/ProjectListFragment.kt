@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.AddProjectActivity
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModelFactory
 
@@ -79,12 +82,14 @@ class ProjectListFragment : Fragment(), OnProjectClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             if (!data?.extras?.isEmpty!!) {
-                projectViewModel.saveProject(data.getStringExtra("project_name"),
-                data.getStringExtra("project_category"),
-                data.getStringExtra("project_amount"),
-                data.getStringExtra("project_address"),
-                data.getStringExtra("project_note"),
-                data.getStringExtra("project_preview"))
+                val project:ProjectDb = projectViewModel.generateProject(data.getStringExtra("project_name"),
+                                        data.getStringExtra("project_category"),
+                                        data.getStringExtra("project_amount"),
+                                        data.getStringExtra("project_address"),
+                                        data.getStringExtra("project_note"),
+                                        data.getStringExtra("project_preview"))
+                projectViewModel.saveProject(project)
+                (activity as MainActivity).projectAddNotification(project.id)
             }
         }
     }
