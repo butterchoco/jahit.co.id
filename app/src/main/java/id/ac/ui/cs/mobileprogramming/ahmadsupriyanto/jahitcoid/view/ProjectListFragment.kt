@@ -1,13 +1,18 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,16 +33,45 @@ interface OnProjectClickListener {
 
 class ProjectListFragment : Fragment(), OnProjectClickListener {
     private lateinit var projectListAdapter: ProjectListAdapter
+    lateinit var _mContext: Context
 
     companion object {
         fun newInstance() =
             ProjectListFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val filter = IntentFilter()
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        _mContext = activity?.applicationContext!!
+        _mContext.registerReceiver(internetBroadcastReceiver(), filter);
+    }
+
+    private fun internetBroadcastReceiver() = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+                val extraWifiState = intent.getIntExtra(
+                    WifiManager.EXTRA_WIFI_STATE,
+                    WifiManager.WIFI_STATE_UNKNOWN
+                )
+                if (extraWifiState == WifiManager.WIFI_STATE_ENABLED) {
+                    Toast.makeText(
+                        context, R.string.internet_connected,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else if (extraWifiState == WifiManager.WIFI_STATE_DISABLED) {
+                    Toast.makeText(
+                        context, R.string.internet_disconnected,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
     private val projectViewModel: ProjectViewModel by viewModels {
         ProjectViewModelFactory((activity?.application as MainApp).repository)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

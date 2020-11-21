@@ -54,7 +54,8 @@ class ProjectDetailFragment : Fragment() {
     }
 
     fun loadFromUri(photoUri: String): Bitmap? {
-        var image: Bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver()!!, Uri.parse(photoUri));
+        var image: Bitmap = MediaStore.Images.Media.getBitmap(
+            activity?.getContentResolver()!!, Uri.parse(photoUri));
          val bitmap = ThumbnailUtils.extractThumbnail(image,240,240);
 
         return bitmap

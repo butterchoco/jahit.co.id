@@ -36,4 +36,6 @@
     <string name="permission_denied">Perizinan ditolak. Tolong izinkan aplikasi untuk menggunakan penyimpanan!</string>
     <string name="permission_ask_title">Permission necessary!</string>
     <string name="permission_ask_content">Permission is necessary!</string>
+    <string name="internet_connected">Internet Connected !</string>
+    <string name="internet_disconnected">Internet Disconnected !</string>
 </resources>
