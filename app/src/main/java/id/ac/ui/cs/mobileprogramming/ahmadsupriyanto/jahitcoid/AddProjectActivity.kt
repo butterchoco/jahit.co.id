@@ -34,18 +34,21 @@ import java.util.*
 class AddProjectActivity : AppCompatActivity() {
 
     var uploadedImage = ""
+    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+    var PROCESS_WAIT = ""
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project_fragment)
+        add_project__preview.visibility = View.GONE
 
-        add_project_preview.setOnClickListener {
-            onPickPhoto()
+        add_project_upload_preview.setOnClickListener {
+            checkPermissionREAD_EXTERNAL_STORAGE(this)
+            PROCESS_WAIT = "UPLOAD_PREVIEW"
         }
 
         save_project_button.setOnClickListener {
             val replyIntent = Intent()
-            Log.d("---------", uploadedImage)
             if (!isFormValidated()) {
                 Toast.makeText(
                     applicationContext,
@@ -70,6 +73,8 @@ class AddProjectActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, resultData)
         if ((resultData != null) && requestCode == PICK_PHOTO_CODE) {
             uploadedImage = resultData.data.toString()
+            add_project__preview.text = uploadedImage
+            add_project__preview.visibility = View.VISIBLE
         }
     }
 
@@ -89,6 +94,73 @@ class AddProjectActivity : AppCompatActivity() {
         )
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, PICK_PHOTO_CODE)
+        }
+    }
+
+    fun showDialog(
+        msg: String, context: Context?,
+        permission: String
+    ) {
+        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+        alertBuilder.setCancelable(true)
+        alertBuilder.setTitle(R.string.permission_ask_title)
+        alertBuilder.setMessage(msg + " " + applicationContext.resources.getString(R.string.permission_ask_content))
+        alertBuilder.setPositiveButton(
+            R.string.yes,
+            object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    ActivityCompat.requestPermissions(
+                        context as Activity, arrayOf(permission),
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                    )
+                }
+            })
+        val alert: AlertDialog = alertBuilder.create()
+        alert.show()
+    }
+
+    fun checkPermissionREAD_EXTERNAL_STORAGE(
+        context: Context
+    ): Boolean {
+        val currentAPIVersion = Build.VERSION.SDK_INT
+        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showDialog(applicationContext.resources.getString(R.string.external_storage_text), context, Manifest.permission.READ_EXTERNAL_STORAGE)
+                } else {
+                    ActivityCompat.requestPermissions(context as Activity, arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
+                }
+                false
+            } else {
+                true
+            }
+        } else {
+            return true
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (PROCESS_WAIT == "UPLOAD_PREVIEW") {
+                    onPickPhoto()
+                }
+                return;
+            } else {
+                Toast.makeText(
+                    this, R.string.permission_denied,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> super.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )
         }
     }
 

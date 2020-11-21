@@ -4,5 +4,6 @@
         <item name="colorSecondary">@color/orange</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="colorAccent">@color/black</item>
+        <item name="actionBarItemBackground">@color/white</item>
     </style>
 </resources>

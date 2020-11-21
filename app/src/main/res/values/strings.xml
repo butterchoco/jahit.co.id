@@ -32,4 +32,8 @@
     <string name="project_add_notification_title">Customer has just added new project</string>
     <string name="project_add_notification_content">Let\'s see and make a quotation!</string>
     <string name="yes">Yes</string>
+    <string name="external_storage_text">External Storage</string>
+    <string name="permission_denied">Permission denied. Please grant permission to use storage!</string>
+    <string name="permission_ask_title">Permission necessary!</string>
+    <string name="permission_ask_content">Permission is necessary!</string>
 </resources>

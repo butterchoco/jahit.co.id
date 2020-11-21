@@ -35,11 +35,8 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
-    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermissionREAD_EXTERNAL_STORAGE(this)
         setContentView(R.layout.login_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -53,71 +50,6 @@ class LoginActivity : AppCompatActivity() {
         customer_choice.setOnClickListener {
             val projectIntent = Intent(this, MainActivity::class.java)
             startActivity(projectIntent)
-        }
-    }
-
-    fun showDialog(
-        msg: String, context: Context?,
-        permission: String
-    ) {
-        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
-        alertBuilder.setCancelable(true)
-        alertBuilder.setTitle("Permission necessary")
-        alertBuilder.setMessage("$msg permission is necessary")
-        alertBuilder.setPositiveButton(
-            R.string.yes,
-            object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    ActivityCompat.requestPermissions(
-                        context as Activity, arrayOf(permission),
-                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
-                    )
-                }
-            })
-        val alert: AlertDialog = alertBuilder.create()
-        alert.show()
-    }
-
-    fun checkPermissionREAD_EXTERNAL_STORAGE(
-        context: Context
-    ): Boolean {
-        val currentAPIVersion = Build.VERSION.SDK_INT
-        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    showDialog("External storage", context, Manifest.permission.READ_EXTERNAL_STORAGE)
-                } else {
-                    ActivityCompat.requestPermissions(context as Activity, arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
-                }
-                false
-            } else {
-                true
-            }
-        } else {
-            true
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                return;
-            } else {
-                Toast.makeText(
-                    this, "GET_ACCOUNTS Denied",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
-            }
-            else -> super.onRequestPermissionsResult(
-                requestCode, permissions,
-                grantResults
-            )
         }
     }
 

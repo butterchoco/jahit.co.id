@@ -32,4 +32,8 @@
     <string name="project_add_notification_title">Pelanggan baru saja menambahkan proyek</string>
     <string name="project_add_notification_content">Yuk kita lihat dan buat penawaran!</string>
     <string name="yes">Ya</string>
+    <string name="external_storage_text">Penyimpanan</string>
+    <string name="permission_denied">Perizinan ditolak. Tolong izinkan aplikasi untuk menggunakan penyimpanan!</string>
+    <string name="permission_ask_title">Permission necessary!</string>
+    <string name="permission_ask_content">Permission is necessary!</string>
 </resources>
