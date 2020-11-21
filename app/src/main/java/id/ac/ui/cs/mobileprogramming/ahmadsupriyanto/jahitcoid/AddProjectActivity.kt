@@ -43,7 +43,9 @@ class AddProjectActivity : AppCompatActivity() {
         add_project__preview.visibility = View.GONE
 
         add_project_upload_preview.setOnClickListener {
-            checkPermissionREAD_EXTERNAL_STORAGE(this)
+            if (checkPermissionREAD_EXTERNAL_STORAGE(this)) {
+                onPickPhoto()
+            }
             PROCESS_WAIT = "UPLOAD_PREVIEW"
         }
 
