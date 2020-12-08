@@ -12,4 +12,8 @@ class Constant {
         const val PROJECT = "project_table"
     }
 
+    object Api {
+        const val API_KEY = "87fb074e43211d25bb8a616f8b10c289"
+    }
+
 }
