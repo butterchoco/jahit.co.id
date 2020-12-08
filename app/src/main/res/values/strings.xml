@@ -5,8 +5,8 @@
     <string name="project_choice_customer_description">Customer who wants assign a sewing project</string>
     <string name="project_choice_partner_description">Vendor who wants to be Jahit.co.id partner</string>
     <string name="next_button_text">Next</string>
-    <string name="project_list_title">Project</string>
-    <string name="project_list_no_item_text">There is no available project at the moment.</string>
+    <string name="movie_list_title">Movie</string>
+    <string name="project_list_no_item_text">There is no available movie at the moment.</string>
     <string name="project_add_greeting">Hi, Jahit.co.id Customer!</string>
     <string name="project_add_description">Please fill these fields below to be sent to our 2000 vendor and find your best vendor!</string>
     <string name="project_add_name_field">Project Name</string>
@@ -38,4 +38,5 @@
     <string name="permission_ask_content">Permission is necessary!</string>
     <string name="internet_connected">Internet Connected !</string>
     <string name="internet_disconnected">Internet Disconnected !</string>
+    <string name="search_hint">Search your movie here !</string>
 </resources>

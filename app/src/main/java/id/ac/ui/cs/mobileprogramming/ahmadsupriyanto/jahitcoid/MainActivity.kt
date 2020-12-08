@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_project, R.id.navigation_transaction, R.id.navigation_chat
             )
         )
+        setSupportActionBar(findViewById(R.id.main_toolbar))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

@@ -5,8 +5,8 @@
     <string name="project_choice_customer_description">Pelanggan yang ingin mengajukan proyek jahit</string>
     <string name="project_choice_partner_description">Vendor penjahit yang ingin menjadi mitra Jahit.co.id</string>
     <string name="next_button_text">Selanjutnya</string>
-    <string name="project_list_title">Proyek</string>
-    <string name="project_list_no_item_text">Tidak ada proyek yang tersedia saat ini.</string>
+    <string name="movie_list_title">Film</string>
+    <string name="project_list_no_item_text">Tidak ada film yang tersedia saat ini.</string>
     <string name="project_add_greeting">Hi, Pelanggan Jahit.co.id!</string>
     <string name="project_add_description">Silahkan lengkapi tabel di bawah ini untuk disebar ke 2000 partner jahit kami dan temukan vendor terbaik anda!</string>
     <string name="project_add_name_field">Nama Proyek</string>
@@ -38,4 +38,5 @@
     <string name="permission_ask_content">Permission is necessary!</string>
     <string name="internet_connected">Internet Connected !</string>
     <string name="internet_disconnected">Internet Disconnected !</string>
+    <string name="search_hint">Cari film kamu di sini !</string>
 </resources>
