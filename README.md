@@ -1,6 +1,6 @@
-# jahit.co.id App
+# MovieAddict
 
-This is an application to help cloth vendor finding their project. This app is built by:
+This is an application to see current trending movies
 Name: Ahmad Supriyanto
 NPM: 1706075016
 Class: B
