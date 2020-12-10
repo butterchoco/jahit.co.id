@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 
-@Entity(tableName = Constant.Table.PROJECT)
+@Entity(tableName = Constant.Table.MOVIE)
 data class Movie (
     @PrimaryKey var id: String,
     @ColumnInfo(name="vote_average") val voteAverage: Int,

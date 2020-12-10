@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_project"
-        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.ProjectListTransitionFragment"
+        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.MovieListTransitionFragment"
         android:label="@string/title_project"
         tools:layout="@layout/project_list_fragment" />
 

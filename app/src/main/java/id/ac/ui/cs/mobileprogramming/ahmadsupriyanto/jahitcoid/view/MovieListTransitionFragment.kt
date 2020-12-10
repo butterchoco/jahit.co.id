@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 
-class ProjectListTransitionFragment : Fragment() {
+class MovieListTransitionFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            ProjectListTransitionFragment()
+            MovieListTransitionFragment()
     }
 
     override fun onCreateView(
@@ -26,8 +26,8 @@ class ProjectListTransitionFragment : Fragment() {
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(
                 R.id.project_list_transition,
-                ProjectListFragment.newInstance(),
-                "PROJECT_FRAGMENT"
+                MovieListFragment.newInstance(),
+                "MOVIE_FRAGMENT"
             )
             ?.commit()
     }

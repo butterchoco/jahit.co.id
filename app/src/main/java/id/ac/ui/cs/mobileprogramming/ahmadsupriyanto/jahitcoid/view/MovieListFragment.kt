@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,29 +16,34 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.AddProjectActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.ProjectListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModelFactory
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModel
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModelFactory
 
-interface OnProjectClickListener {
-    fun onProjectClick(it: View);
+interface OnMovieClickListener {
+    fun onMovieClick(it: View);
 }
 
-class ProjectListFragment : Fragment(), OnProjectClickListener {
-    private lateinit var projectListAdapter: ProjectListAdapter
+class MovieListFragment : Fragment(), OnMovieClickListener {
+    private lateinit var projectListAdapter: MovieListAdapter
     lateinit var _mContext: Context
+    private val newWordActivityRequestCode = 1
+
+    private val movieViewModel: MovieViewModel by viewModels {
+        MovieViewModelFactory((activity?.application as MainApp).movieRepository)
+    }
 
     companion object {
         fun newInstance() =
-            ProjectListFragment()
+            MovieListFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,28 +75,25 @@ class ProjectListFragment : Fragment(), OnProjectClickListener {
             }
     }
 
-    private val projectViewModel: ProjectViewModel by viewModels {
-        ProjectViewModelFactory((activity?.application as MainApp).repository)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val projectListView = inflater.inflate(R.layout.project_list_fragment, container, false)
-        projectListAdapter = ProjectListAdapter()
+        projectListAdapter = MovieListAdapter()
         projectListAdapter.setListener(this)
         val recycler: RecyclerView = projectListView.findViewById(R.id.project_list_container)
         val noItem: TextView = projectListView.findViewById(R.id.project_list_no_item)
         recycler.adapter = projectListAdapter
-        recycler.layoutManager = LinearLayoutManager(
-            activity,
+        recycler.layoutManager = GridLayoutManager(
+            activity, 2,
             RecyclerView.VERTICAL, false
         )
-        projectViewModel.listenProjectsResult().observe(viewLifecycleOwner, Observer { data ->
+        movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                projectListAdapter.addProjectToList(it)
-                if (projectListAdapter.getProjectList().isEmpty()) {
+                Log.d("---------------", it.toString())
+                projectListAdapter.addMovieToList(it as MutableList<Movie>)
+                if (projectListAdapter.getMovieList().isEmpty()) {
                     recycler.visibility = View.GONE
                     noItem.visibility = View.VISIBLE
                 } else {
@@ -100,51 +103,49 @@ class ProjectListFragment : Fragment(), OnProjectClickListener {
             }
         })
 
-        projectListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
-            val addProjectIntent = Intent(activity, AddProjectActivity::class.java)
-            startActivityForResult(addProjectIntent, 1)
-        }
+//        projectListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
+//            val addMovieIntent = Intent(activity, AddMovieActivity::class.java)
+//            startActivityForResult(addMovieIntent, 1)
+//        }
 
         return projectListView
     }
 
-    private val newWordActivityRequestCode = 1
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+//            if (!data?.extras?.isEmpty!!) {
+//                val project:Movie = movieViewModel.generateProject(data.getStringExtra("project_name"),
+//                                        data.getStringExtra("project_category"),
+//                                        data.getStringExtra("project_amount"),
+//                                        data.getStringExtra("project_address"),
+//                                        data.getStringExtra("project_note"),
+//                                        data.getStringExtra("project_preview"))
+//                movieViewModel.saveProject(project)
+//                (activity as MainActivity).projectAddNotification(project.id)
+//            }
+//        }
+//    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            if (!data?.extras?.isEmpty!!) {
-                val project:ProjectDb = projectViewModel.generateProject(data.getStringExtra("project_name"),
-                                        data.getStringExtra("project_category"),
-                                        data.getStringExtra("project_amount"),
-                                        data.getStringExtra("project_address"),
-                                        data.getStringExtra("project_note"),
-                                        data.getStringExtra("project_preview"))
-                projectViewModel.saveProject(project)
-                (activity as MainActivity).projectAddNotification(project.id)
-            }
-        }
-    }
-
-    override fun onProjectClick(it: View) {
-        val project = projectListAdapter.getProjectList().find { data ->
+    override fun onMovieClick(it: View) {
+        val project = projectListAdapter.getMovieList().find { data ->
             data.id == it.tag.toString()
         }
         val bundle: Bundle = Bundle()
         if (project != null) {
-            bundle.putString("project_price", project.price)
-            bundle.putString("project_name", project.name)
-            bundle.putString("project_category", project.category)
-            bundle.putString("project_amount", project.amount)
-            bundle.putString("project_address", project.address)
-            bundle.putString("project_note", project.note)
-            bundle.putString("project_preview", project.preview)
-            bundle.putString("project_quotation", project.quotation)
-            bundle.putString("project_vendor", project.vendor)
-            bundle.putString("project_startDate", project.startDate)
-            bundle.putString("project_endDate", project.endDate)
+//            bundle.putString("project_price", project.price)
+//            bundle.putString("project_name", project.name)
+//            bundle.putString("project_category", project.category)
+//            bundle.putString("project_amount", project.amount)
+//            bundle.putString("project_address", project.address)
+//            bundle.putString("project_note", project.note)
+//            bundle.putString("project_preview", project.preview)
+//            bundle.putString("project_quotation", project.quotation)
+//            bundle.putString("project_vendor", project.vendor)
+//            bundle.putString("project_startDate", project.startDate)
+//            bundle.putString("project_endDate", project.endDate)
         }
-        val projectDetailFragment: ProjectDetailFragment = ProjectDetailFragment.newInstance()
+        val projectDetailFragment: MovieDetailFragment = MovieDetailFragment.newInstance()
         projectDetailFragment.arguments = bundle
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(
