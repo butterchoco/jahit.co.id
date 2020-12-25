@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 
-class AddProjectFragment : Fragment() {
+class AddMovieFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

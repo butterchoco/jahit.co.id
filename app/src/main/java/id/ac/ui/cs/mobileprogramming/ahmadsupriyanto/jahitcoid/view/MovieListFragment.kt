@@ -24,7 +24,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.MovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModelFactory
 
@@ -92,7 +92,7 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 Log.d("---------------", it.toString())
-                projectListAdapter.addMovieToList(it as MutableList<Movie>)
+                projectListAdapter.addMovieToList(it as MutableList<MovieDb>)
                 if (projectListAdapter.getMovieList().isEmpty()) {
                     recycler.visibility = View.GONE
                     noItem.visibility = View.VISIBLE
@@ -129,7 +129,7 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
 
     override fun onMovieClick(it: View) {
         val project = projectListAdapter.getMovieList().find { data ->
-            data.id == it.tag.toString()
+            data.id == it.tag
         }
         val bundle: Bundle = Bundle()
         if (project != null) {

@@ -3,13 +3,13 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel
 import androidx.lifecycle.*
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.MovieRepo
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.MovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 
 class MovieViewModel(private val movieRepo: MovieRepo) : ViewModel() {
-    var movieList: MutableLiveData<List<Movie>> = MutableLiveData()
+    var movieList: MutableLiveData<List<MovieDb>> = MutableLiveData()
 
-    fun getMoviesRepository(): MutableLiveData<List<Movie>> {
+    fun getMoviesRepository(): MutableLiveData<List<MovieDb>> {
         movieList = movieRepo.getTrendingMovieList(Constant.Api.API_KEY)
         return movieList
     }

@@ -14,12 +14,12 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.DownloadImageTask
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter.MovieListViewHolder
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.MovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.OnMovieClickListener
 
-class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparator()) {
+class MovieListAdapter : ListAdapter<MovieDb, MovieListViewHolder>(MoviesComparator()) {
 
-    private var movieList: MutableList<Movie> = mutableListOf()
+    private var movieList: MutableList<MovieDb> = mutableListOf()
     private lateinit var listener: OnMovieClickListener
 
     override fun onCreateViewHolder(
@@ -46,7 +46,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         return movieList.size
     }
 
-    fun addMovieToList(projList: MutableList<Movie>) {
+    fun addMovieToList(projList: MutableList<MovieDb>) {
         movieList.addAll(projList)
         notifyDataSetChanged()
     }
@@ -55,7 +55,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         this.listener = listener
     }
 
-    fun getMovieList(): MutableList<Movie> {
+    fun getMovieList(): MutableList<MovieDb> {
         return movieList
     }
 
@@ -67,11 +67,11 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
 //        private var movieStatus: TextView = itemView.findViewById(R.id.movie_status)
 //        private var movieAnnotation: TextView = itemView.findViewById(R.id.movie_annotation)
 
-        fun bind(movie: Movie) {
+        fun bind(movie: MovieDb) {
             movieId.tag = movie.id
-            if (movie.posterPath !== null) {
-                DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.posterPath)
-                Log.d("test", Constant.Api.BASE_POSTER_URL + "w185" + movie.posterPath)
+            if (movie.poster_path !== null) {
+                DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
+                Log.d("test", Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
             }
             movieTitle.text = movie.title;
             movieDescription.text = movie.overview.substring(0, 80) + "...";
@@ -89,12 +89,12 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         }
     }
 
-    class MoviesComparator : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+    class MoviesComparator : DiffUtil.ItemCallback<MovieDb>() {
+        override fun areItemsTheSame(oldItem: MovieDb, newItem: MovieDb): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areContentsTheSame(oldItem: MovieDb, newItem: MovieDb): Boolean {
             return oldItem.id == newItem.id
         }
     }
