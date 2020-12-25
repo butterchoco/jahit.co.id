@@ -13,7 +13,7 @@ class AddMovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.add_project_fragment, container, false)
+        return inflater.inflate(R.layout.add_movie_fragment, container, false)
     }
 
 }

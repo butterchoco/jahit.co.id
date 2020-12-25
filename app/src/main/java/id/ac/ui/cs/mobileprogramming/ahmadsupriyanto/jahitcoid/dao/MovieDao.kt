@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface MovieDao {
     @Headers ("Content-Type: application/json")
-    @GET("/trending/movie/day")
+    @GET("trending/movie/day")
     fun getTrendingMovieList(@Query("api_key") apiKey: String, @Query("language") language: String, @Query("append_to_response") appendToResponse: String, @Query("include_image_language") includeImageLanguage: String): Call<TrendingMovieListData>
 }

@@ -9,7 +9,7 @@
         android:id="@+id/navigation_project"
         android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.MovieListTransitionFragment"
         android:label="@string/title_movie"
-        tools:layout="@layout/project_list_fragment" />
+        tools:layout="@layout/home_list_fragment" />
 
     <fragment
         android:id="@+id/navigation_transaction"

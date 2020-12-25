@@ -18,14 +18,14 @@ class MovieListTransitionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.project_list_transition, container, false)
+        return inflater.inflate(R.layout.home_list_transition, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(
-                R.id.project_list_transition,
+                R.id.home_list_transition,
                 MovieListFragment.newInstance(),
                 "MOVIE_FRAGMENT"
             )

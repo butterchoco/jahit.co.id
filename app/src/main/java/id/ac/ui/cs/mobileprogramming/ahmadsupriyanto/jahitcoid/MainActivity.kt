@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     fun projectAddNotification(projectId: String) {
         var builder = NotificationCompat.Builder(this, projectId)
                             .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle(applicationContext.resources.getString(R.string.project_add_notification_title))
-                            .setContentText(applicationContext.resources.getString(R.string.project_add_notification_content))
+                            .setContentTitle(applicationContext.resources.getString(R.string.movie_add_notification_title))
+                            .setContentText(applicationContext.resources.getString(R.string.movie_add_notification_content))
                             .setDefaults(NotificationCompat.DEFAULT_ALL)
                             .setPriority(NotificationCompat.PRIORITY_HIGH)
         val notifId = projectId.replace("[^\\d.]".toRegex(), "").substring(0,4)

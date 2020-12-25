@@ -15,7 +15,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
@@ -30,7 +29,7 @@ interface OnMovieClickListener {
 }
 
 class MovieListFragment : Fragment(), OnMovieClickListener {
-    private lateinit var projectListAdapter: MovieListAdapter
+    private lateinit var movieListAdapter: MovieListAdapter
     lateinit var _mContext: Context
     private val newWordActivityRequestCode = 1
 
@@ -76,12 +75,12 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val projectListView = inflater.inflate(R.layout.project_list_fragment, container, false)
-        projectListAdapter = MovieListAdapter()
-        projectListAdapter.setListener(this)
-        val recycler: RecyclerView = projectListView.findViewById(R.id.project_list_container)
-        val noItem: TextView = projectListView.findViewById(R.id.project_list_no_item)
-        recycler.adapter = projectListAdapter
+        val movieListView = inflater.inflate(R.layout.home_list_fragment, container, false)
+        movieListAdapter = MovieListAdapter()
+        movieListAdapter.setListener(this)
+        val recycler: RecyclerView = movieListView.findViewById(R.id.movie_list_container)
+        val noItem: TextView = movieListView.findViewById(R.id.movie_list_no_item)
+        recycler.adapter = movieListAdapter
         recycler.layoutManager = LinearLayoutManager(
             activity,
             RecyclerView.HORIZONTAL, false
@@ -89,8 +88,8 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 Log.d("---------------", it.toString())
-                projectListAdapter.addMovieToList(it as MutableList<Movie>)
-                if (projectListAdapter.getMovieList().isEmpty()) {
+                movieListAdapter.addMovieToList(it as MutableList<Movie>)
+                if (movieListAdapter.getMovieList().isEmpty()) {
                     recycler.visibility = View.GONE
                     noItem.visibility = View.VISIBLE
                 } else {
@@ -100,12 +99,12 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
             }
         })
 
-//        projectListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
+//        movieListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
 //            val addMovieIntent = Intent(activity, AddMovieActivity::class.java)
 //            startActivityForResult(addMovieIntent, 1)
 //        }
 
-        return projectListView
+        return movieListView
     }
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -125,30 +124,24 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
 //    }
 
     override fun onMovieClick(it: View) {
-        val project = projectListAdapter.getMovieList().find { data ->
+        val movie = movieListAdapter.getMovieList().find { data ->
             data.id == it.tag
         }
-        val bundle: Bundle = Bundle()
-        if (project != null) {
-//            bundle.putString("project_price", project.price)
-//            bundle.putString("project_name", project.name)
-//            bundle.putString("project_category", project.category)
-//            bundle.putString("project_amount", project.amount)
-//            bundle.putString("project_address", project.address)
-//            bundle.putString("project_note", project.note)
-//            bundle.putString("project_preview", project.preview)
-//            bundle.putString("project_quotation", project.quotation)
-//            bundle.putString("project_vendor", project.vendor)
-//            bundle.putString("project_startDate", project.startDate)
-//            bundle.putString("project_endDate", project.endDate)
+        val bundle = Bundle()
+        if (movie != null) {
+            bundle.putString("movie_title", movie.title)
+            bundle.putString("movie_vote_average", movie.vote_average.toString())
+            bundle.putString("movie_overview", movie.overview)
+            bundle.putString("movie_release_date", movie.release_date)
+            bundle.putString("movie_poster_path", movie.poster_path)
         }
-        val projectDetailFragment: MovieDetailFragment = MovieDetailFragment.newInstance()
-        projectDetailFragment.arguments = bundle
+        val movieDetailFragment: MovieDetailFragment = MovieDetailFragment.newInstance()
+        movieDetailFragment.arguments = bundle
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(
-                R.id.project_list_transition,
-                projectDetailFragment,
-                "PROJECT_DETAIL_FRAGMENT"
+                R.id.home_list_transition,
+                movieDetailFragment,
+                "MOVIE_DETAIL_FRAGMENT"
             )
             ?.addToBackStack(null)
             ?.commit()
