@@ -5,15 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.dao.MovieDao
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.api.ServiceBuilder
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.api.TrendingMovieListData
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.MovieDb
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MovieRepo {
-    var listOfMovies: MutableLiveData<List<MovieDb>> = MutableLiveData()
+    var listOfMovies: MutableLiveData<List<Movie>> = MutableLiveData()
 
-    fun getTrendingMovieList(apiKey: String): MutableLiveData<List<MovieDb>> {
+    fun getTrendingMovieList(apiKey: String): MutableLiveData<List<Movie>> {
         val retrofit =
             ServiceBuilder.buildService(
                 MovieDao::class.java

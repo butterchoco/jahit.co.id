@@ -1,6 +1,5 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -17,14 +16,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.MovieDb
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.MovieViewModelFactory
 
@@ -92,7 +88,7 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 Log.d("---------------", it.toString())
-                projectListAdapter.addMovieToList(it as MutableList<MovieDb>)
+                projectListAdapter.addMovieToList(it as MutableList<Movie>)
                 if (projectListAdapter.getMovieList().isEmpty()) {
                     recycler.visibility = View.GONE
                     noItem.visibility = View.VISIBLE

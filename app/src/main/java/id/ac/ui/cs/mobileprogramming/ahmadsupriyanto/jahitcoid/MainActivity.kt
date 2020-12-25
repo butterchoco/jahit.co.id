@@ -2,19 +2,15 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.os.HandlerCompat
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.ProjectDb
 
 class MainActivity : AppCompatActivity() {
 

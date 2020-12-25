@@ -2,8 +2,8 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import androidx.room.Room
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.AppDatabase
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.ProjectRepo
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.ProjectViewModel
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.repository.FavoriteMovieRepo
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.FavoriteMovieViewModel
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.applicationContext
 
@@ -24,12 +24,12 @@ val projectModule = applicationContext {
     // Create NoteRepository
     bean { get<AppDatabase>(Constant.Koin.DATABASE_DI).projectDao() }
     bean {
-        ProjectRepo(
+        FavoriteMovieRepo(
             get()
         )
     }
 
-    // Create ProjectViewModel
-    viewModel { ProjectViewModel(get()) }
+    // Create FavoriteMovieViewModel
+    viewModel { FavoriteMovieViewModel(get()) }
 
 }

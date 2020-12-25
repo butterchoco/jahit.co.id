@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.dao.ProjectDao
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.dao.FavoriteMovieDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(ProjectDb::class), version = 1)
+@Database(entities = arrayOf(FavoriteMovieDb::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun projectDao(): ProjectDao
+    abstract fun projectDao(): FavoriteMovieDao
 
     private class WordDatabaseCallback(
        private val scope: CoroutineScope

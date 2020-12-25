@@ -1,9 +1,8 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database
 
-data class MovieDb(
+data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
-    val genre_ids: List<Int>,
     val id: Int,
     val media_type: String,
     val original_language: String,
