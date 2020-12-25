@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:paddingBottom="72dp" >
 
-    <ImageView
+        <ImageView
         android:id="@+id/movie_detail_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

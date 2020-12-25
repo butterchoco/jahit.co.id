@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -64,7 +65,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         private var movieId:MaterialCardView = itemView.findViewById(R.id.movie_card)
         private var moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
         private var movieTitle: TextView = itemView.findViewById(R.id.movie_title)
-        private var movieRating: Chip = itemView.findViewById(R.id.movie_rating)
+        private var movieRating: RatingBar = itemView.findViewById(R.id.movie_rating)
 
         fun bind(movie: Movie) {
             movieId.tag = movie.id
@@ -73,7 +74,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
                 Log.d("test", Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
             }
             movieTitle.text = movie.title
-            movieRating.text = movie.vote_average.toString()
+            movieRating.rating = (movie.vote_average/2).toFloat()
         }
 
         companion object {
