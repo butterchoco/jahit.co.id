@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.DownloadImageTask
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
@@ -63,6 +64,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         private var movieId:MaterialCardView = itemView.findViewById(R.id.movie_card)
         private var moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
         private var movieTitle: TextView = itemView.findViewById(R.id.movie_title)
+        private var movieRating: Chip = itemView.findViewById(R.id.movie_rating)
 
         fun bind(movie: Movie) {
             movieId.tag = movie.id
@@ -70,7 +72,8 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
                 DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
                 Log.d("test", Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
             }
-            movieTitle.text = movie.title;
+            movieTitle.text = movie.title
+            movieRating.text = movie.vote_average.toString()
         }
 
         companion object {

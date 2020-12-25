@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
@@ -81,9 +82,9 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         val recycler: RecyclerView = projectListView.findViewById(R.id.project_list_container)
         val noItem: TextView = projectListView.findViewById(R.id.project_list_no_item)
         recycler.adapter = projectListAdapter
-        recycler.layoutManager = GridLayoutManager(
-            activity, 2,
-            RecyclerView.VERTICAL, false
+        recycler.layoutManager = LinearLayoutManager(
+            activity,
+            RecyclerView.HORIZONTAL, false
         )
         movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {

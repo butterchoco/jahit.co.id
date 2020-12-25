@@ -6,19 +6,26 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/activity_scrolling">
+    tools:showIn="@layout/activity_main">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trending"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:layout_marginVertical="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/project_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:paddingBottom="72dp" >
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
