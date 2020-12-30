@@ -19,7 +19,7 @@
     <string name="movie_add_submit_text">Add Project</string>
     <string name="movie_detail_title_overview">Overview</string>
     <string name="title_movie">Movie</string>
-    <string name="title_transaction">Transaction</string>
+    <string name="title_favorite">Favorite</string>
     <string name="title_chat">Chat</string>
     <string name="double_back_pressed_warning">Press back again to exit</string>
     <string name="movie_add_notification_title">Customer has just added new movie</string>
@@ -32,7 +32,7 @@
     <string name="internet_connected">Internet Connected !</string>
     <string name="internet_disconnected">Internet Disconnected !</string>
     <string name="search_hint">Search your movie here !</string>
-    <string name="movie_add_favorite">Favorite</string>
+    <string name="movie_add_favorite">Add Favorite</string>
     <string name="movie_remove_favorite">Saved</string>
     <string name="internet_not_available">No internet available !</string>
 </resources>

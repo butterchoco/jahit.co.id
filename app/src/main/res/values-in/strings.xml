@@ -19,7 +19,7 @@
     <string name="movie_add_submit_text">Tambah Proyek</string>
     <string name="movie_detail_title_overview">Abstraksi</string>
     <string name="title_movie">Film</string>
-    <string name="title_transaction">Transaksi</string>
+    <string name="title_favorite">Favorit</string>
     <string name="title_chat">Pesan</string>
     <string name="double_back_pressed_warning">Tekan kembali lagi untuk keluar</string>
     <string name="movie_add_notification_title">Pelanggan baru saja menambahkan proyek</string>

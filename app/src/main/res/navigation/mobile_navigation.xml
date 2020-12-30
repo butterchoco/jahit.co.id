@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_transaction"
         android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.FavoriteMovieListTransitionFragment"
-        android:label="@string/title_transaction"
+        android:label="@string/title_favorite"
         tools:layout="@layout/favorite_list_fragment" />
 
     <fragment

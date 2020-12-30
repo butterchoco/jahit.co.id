@@ -1,5 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -22,11 +24,15 @@ import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
     var doubleBackToExit: Boolean = false
-
+    lateinit var _mContext: Context
+    var isSetView = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initActivityContentView()
+        _mContext = applicationContext
+        val filter = IntentFilter()
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
     }
 
     override fun onBackPressed() {
@@ -52,6 +58,32 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(findViewById(R.id.main_toolbar))
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
+    }
+
+    fun isInternetAvailableBroadcastReceiver(_mContext: Context) = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
+            if (!isInternetAvailable(_mContext)){
+                setContentView(R.layout.no_internet_access)
+                isSetView = false
+            } else {
+                if (!isSetView) {
+                    val mStartActivity = Intent(context, MainActivity::class.java)
+                    val mPendingIntentId = 123456
+                    val mPendingIntent: PendingIntent = PendingIntent.getActivity(
+                        context,
+                        mPendingIntentId,
+                        mStartActivity,
+                        PendingIntent.FLAG_CANCEL_CURRENT
+                    )
+                    val mgr: AlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent)
+                    System.exit(0)
+                } else {
+                    initActivityContentView()
+                }
+            }
+        }
     }
 
     fun isInternetAvailable(context: Context): Boolean {

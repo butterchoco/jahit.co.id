@@ -16,7 +16,7 @@ class DownloadImageTask(var bmImage: ImageView) :
             val `in` = URL(urldisplay).openStream()
             picture = BitmapFactory.decodeStream(`in`)
         } catch (e: Exception) {
-            Log.e("Error", e.message)
+            Log.e("Error Download", e.message)
             e.printStackTrace()
         }
         return picture
