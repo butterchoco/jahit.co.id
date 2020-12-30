@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter
@@ -30,8 +32,6 @@ interface OnMovieClickListener {
 
 class MovieListFragment : Fragment(), OnMovieClickListener {
     private lateinit var movieListAdapter: MovieListAdapter
-    lateinit var _mContext: Context
-    private val newWordActivityRequestCode = 1
 
     private val movieViewModel: MovieViewModel by viewModels {
         MovieViewModelFactory((activity?.application as MainApp).movieRepository)
@@ -40,35 +40,6 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
     companion object {
         fun newInstance() =
             MovieListFragment()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val filter = IntentFilter()
-        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        _mContext = activity?.applicationContext!!
-        _mContext.registerReceiver(internetBroadcastReceiver(), filter);
-    }
-
-    private fun internetBroadcastReceiver() = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent) {
-                val extraWifiState = intent.getIntExtra(
-                    WifiManager.EXTRA_WIFI_STATE,
-                    WifiManager.WIFI_STATE_UNKNOWN
-                )
-                if (extraWifiState == WifiManager.WIFI_STATE_ENABLED) {
-                    Toast.makeText(
-                        context, R.string.internet_connected,
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                } else if (extraWifiState == WifiManager.WIFI_STATE_DISABLED) {
-                    Toast.makeText(
-                        context, R.string.internet_disconnected,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
     }
 
     override fun onCreateView(
