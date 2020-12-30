@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_transaction"
-        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.TransactionFragment"
+        android:name="id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.FavoriteListFragment"
         android:label="@string/title_transaction"
         tools:layout="@layout/transaction_list_fragment" />
 

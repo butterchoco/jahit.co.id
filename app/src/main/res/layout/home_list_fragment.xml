@@ -31,7 +31,7 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@string/movie_list_title"
-                app:titleTextColor="@color/white" />
+                app:titleTextColor="@color/white"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

@@ -22,7 +22,7 @@ val projectModule = applicationContext {
     }
 
     // Create NoteRepository
-    bean { get<AppDatabase>(Constant.Koin.DATABASE_DI).projectDao() }
+    bean { get<AppDatabase>(Constant.Koin.DATABASE_DI).favoriteMovieDao() }
     bean {
         FavoriteMovieRepo(
             get()

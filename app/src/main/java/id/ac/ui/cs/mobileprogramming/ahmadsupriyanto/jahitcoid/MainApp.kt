@@ -16,6 +16,6 @@ class MainApp : Application() {
     // Using by lazy so the database and the repository are only created when they're needed
     // rather than when the application starts
     val database by lazy { AppDatabase.getDatabase(this, applicationScope) }
-    val projectRepository by lazy { FavoriteMovieRepo(database.projectDao()) }
     val movieRepository by lazy { MovieRepo() }
+    val favoriteMovieRepository by lazy { FavoriteMovieRepo(database.favoriteMovieDao()) }
 }

@@ -87,7 +87,6 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         )
         movieViewModel.getMoviesRepository().observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                Log.d("---------------", it.toString())
                 movieListAdapter.addMovieToList(it as MutableList<Movie>)
                 if (movieListAdapter.getMovieList().isEmpty()) {
                     recycler.visibility = View.GONE
@@ -99,29 +98,8 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
             }
         })
 
-//        movieListView.findViewById<FloatingActionButton>(R.id.add_project_button).setOnClickListener{
-//            val addMovieIntent = Intent(activity, AddMovieActivity::class.java)
-//            startActivityForResult(addMovieIntent, 1)
-//        }
-
         return movieListView
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-//            if (!data?.extras?.isEmpty!!) {
-//                val project:Movie = movieViewModel.generateProject(data.getStringExtra("project_name"),
-//                                        data.getStringExtra("project_category"),
-//                                        data.getStringExtra("project_amount"),
-//                                        data.getStringExtra("project_address"),
-//                                        data.getStringExtra("project_note"),
-//                                        data.getStringExtra("project_preview"))
-//                movieViewModel.saveProject(project)
-//                (activity as MainActivity).projectAddNotification(project.id)
-//            }
-//        }
-//    }
 
     override fun onMovieClick(it: View) {
         val movie = movieListAdapter.getMovieList().find { data ->
@@ -129,11 +107,7 @@ class MovieListFragment : Fragment(), OnMovieClickListener {
         }
         val bundle = Bundle()
         if (movie != null) {
-            bundle.putString("movie_title", movie.title)
-            bundle.putString("movie_vote_average", movie.vote_average.toString())
-            bundle.putString("movie_overview", movie.overview)
-            bundle.putString("movie_release_date", movie.release_date)
-            bundle.putString("movie_poster_path", movie.poster_path)
+            bundle.putParcelable("MovieObject", movie)
         }
         val movieDetailFragment: MovieDetailFragment = MovieDetailFragment.newInstance()
         movieDetailFragment.arguments = bundle

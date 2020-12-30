@@ -9,14 +9,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/white"
         android:paddingBottom="72dp" >
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
         <ImageView
         android:id="@+id/movie_detail_preview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_movie_placeholder"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/movie_add_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_add_fab"
+                android:text="@string/movie_add_favorite"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,6 +46,7 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/yellow"
             android:textSize="8dp"/>
+
         <TextView
             android:id="@+id/movie_detail_title"
             android:layout_width="wrap_content"

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 @Database(entities = arrayOf(FavoriteMovieDb::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun projectDao(): FavoriteMovieDao
+    abstract fun favoriteMovieDao(): FavoriteMovieDao
 
     private class WordDatabaseCallback(
        private val scope: CoroutineScope
@@ -21,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
            super.onCreate(db)
            INSTANCE?.let { database ->
                scope.launch {
-                   var wordDao = database.projectDao()
+                   var wordDao = database.favoriteMovieDao()
                }
            }
        }
