@@ -71,7 +71,7 @@ class FavoriteListFragment : Fragment(), OnMovieClickListener {
             ?.replace(
                 R.id.favorite_list_transition,
                 favoriteMovieDetailFragment,
-                "MOVIE_DETAIL_FRAGMENT"
+                "FAVORITE_MOVIE_DETAIL_FRAGMENT"
             )
             ?.addToBackStack(null)
             ?.commit()
