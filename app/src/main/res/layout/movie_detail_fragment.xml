@@ -31,6 +31,13 @@
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_add_fab"
                 android:text="@string/movie_add_favorite"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/movie_remove_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/grey"
+                android:textColor="@color/black"
+                android:text="@string/movie_remove_favorite"/>
         </LinearLayout>
 
         <LinearLayout

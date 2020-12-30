@@ -11,28 +11,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.chip.Chip
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.DownloadImageTask
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.MovieListAdapter.MovieListViewHolder
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.adapter.FavoriteMovieListAdapter.FavoriteMovieListViewHolder
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.FavoriteMovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.FavoriteListFragment
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.view.OnMovieClickListener
 
-class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparator()) {
+class FavoriteMovieListAdapter : ListAdapter<Movie, FavoriteMovieListViewHolder>(MoviesComparator()) {
 
-    private var movieList: MutableList<Movie> = mutableListOf()
+    private var movieList: MutableList<FavoriteMovieDb> = mutableListOf()
     private lateinit var listener: OnMovieClickListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieListViewHolder {
-        return MovieListViewHolder.create(parent)
+    ): FavoriteMovieListViewHolder {
+        return FavoriteMovieListViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(
-        holder: MovieListViewHolder,
+        holder: FavoriteMovieListViewHolder,
         position: Int
     ) {
         val movie = movieList[position]
@@ -48,39 +49,39 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         return movieList.size
     }
 
-    fun addMovieToList(projList: MutableList<Movie>) {
+    fun addMovieToList(projList: MutableList<FavoriteMovieDb>) {
         movieList.addAll(projList)
         notifyDataSetChanged()
     }
 
-    fun setListener(listener: OnMovieClickListener) {
+    fun setListener(listener: FavoriteListFragment) {
         this.listener = listener
     }
 
-    fun getMovieList(): MutableList<Movie> {
+    fun getMovieList(): MutableList<FavoriteMovieDb> {
         return movieList
     }
 
-    class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var movieId:MaterialCardView = itemView.findViewById(R.id.movie_card)
-        private var moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
-        private var movieTitle: TextView = itemView.findViewById(R.id.movie_title)
-        private var movieRating: RatingBar = itemView.findViewById(R.id.movie_rating)
+    class FavoriteMovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var movieId:MaterialCardView = itemView.findViewById(R.id.favorite_movie_card)
+        private var moviePoster: ImageView = itemView.findViewById(R.id.favorite_movie_poster)
+        private var movieTitle: TextView = itemView.findViewById(R.id.favorite_movie_title)
+        private var movieRating: RatingBar = itemView.findViewById(R.id.favorite_movie_rating)
 
-        fun bind(movie: Movie) {
+        fun bind(movie: FavoriteMovieDb) {
             movieId.tag = movie.id
-            if (movie.poster_path !== null) {
-                DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.poster_path)
+            if (movie.posterPath !== null) {
+                DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.posterPath)
             }
             movieTitle.text = movie.title
-            movieRating.rating = (movie.vote_average/2).toFloat()
+            movieRating.rating = (movie.voteAverage/2).toFloat()
         }
 
         companion object {
-            fun create(parent: ViewGroup): MovieListViewHolder {
+            fun create(parent: ViewGroup): FavoriteMovieListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.movie_list_item, parent, false)
-                return MovieListViewHolder(view)
+                    .inflate(R.layout.favorite_movie_list_item, parent, false)
+                return FavoriteMovieListViewHolder(view)
             }
         }
     }

@@ -33,4 +33,5 @@
     <string name="internet_disconnected">Internet Disconnected !</string>
     <string name="search_hint">Cari film kamu di sini !</string>
     <string name="movie_add_favorite">Favorit</string>
+    <string name="movie_remove_favorite">Difavoritkan</string>
 </resources>

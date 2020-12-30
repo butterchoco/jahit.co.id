@@ -49,8 +49,6 @@ class FavoriteMovieRepo(private val favoriteMovieDao: FavoriteMovieDao) {
         return favoriteMovieDao.getAll()
     }
 
-    private fun generateUuid(): String = UUID.randomUUID().toString()
-
     suspend fun deleteProject(projectDbFavorite: FavoriteMovieDb) {
         favoriteMovieDao.delete(projectDbFavorite)
     }

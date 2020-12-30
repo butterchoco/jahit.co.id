@@ -13,22 +13,29 @@ class FavoriteMovieViewModel(private val favoriteMovieRepo: FavoriteMovieRepo) :
         favoriteMovieRepo.saveProject(favoriteMovieDb)
     }
 
-    fun generateFavoriteMovie(movie: Movie?): FavoriteMovieDb {
-        return favoriteMovieRepo.generateFavoriteMovie(
-            movie?.id!!,
-            movie.vote_average,
-            movie.overview.toString(),
-            movie.release_date.toString(),
-            movie.title.toString(),
-            movie.adult,
-            movie.backdrop_path.toString(),
-            movie.video,
-            movie.original_language.toString(),
-            movie.original_title.toString(),
-            movie.poster_path.toString(),
-            movie.popularity,
-            movie.media_type.toString(),
-            movie.vote_count)
+    fun removeFavorite(favoriteMovieDb: FavoriteMovieDb) = viewModelScope.launch {
+        favoriteMovieRepo.deleteProject(favoriteMovieDb)
+    }
+
+    fun generateFavoriteMovie(movie: Movie?): FavoriteMovieDb? {
+        if (movie != null) {
+            return favoriteMovieRepo.generateFavoriteMovie(
+                movie.id,
+                movie.vote_average,
+                movie.overview,
+                movie.release_date,
+                movie.title,
+                movie.adult,
+                movie.backdrop_path,
+                movie.video,
+                movie.original_language,
+                movie.original_title,
+                movie.poster_path,
+                movie.popularity,
+                movie.media_type,
+                movie.vote_count)
+        }
+        return null
     }
 
     fun listenFavoriteResult(): LiveData<MutableList<FavoriteMovieDb>> {

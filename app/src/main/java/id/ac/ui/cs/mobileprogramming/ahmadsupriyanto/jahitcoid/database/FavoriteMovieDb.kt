@@ -1,10 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = Constant.Table.MOVIE)
 data class FavoriteMovieDb (
     @PrimaryKey
@@ -22,4 +25,4 @@ data class FavoriteMovieDb (
     @ColumnInfo(name="popularity") val popularity: Double,
     @ColumnInfo(name="media_type") val mediaType: String,
     @ColumnInfo(name="vote_count") val voteCount: Int
-)
+) : Parcelable

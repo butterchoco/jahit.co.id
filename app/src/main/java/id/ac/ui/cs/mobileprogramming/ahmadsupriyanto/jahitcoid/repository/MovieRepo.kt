@@ -25,7 +25,6 @@ class MovieRepo {
                 }
                 override fun onResponse(call: Call<TrendingMovieListData>, response: Response<TrendingMovieListData>) {
                     val results = response.body()?.results
-                    Log.d("results-----------", results.toString())
                     listOfMovies.postValue(results)
                 }
             }

@@ -13,12 +13,13 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.DownloadImageTask
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.R
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.FavoriteMovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.FavoriteMovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid.viewmodel.FavoriteMovieViewModel.FavoriteMovieViewModelFactory
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
 
-class MovieDetailFragment : Fragment() {
+class FavoriteMovieDetailFragment : Fragment() {
 
     val MOVIE_OBJECT = "MovieObject"
 
@@ -28,7 +29,7 @@ class MovieDetailFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            MovieDetailFragment()
+            FavoriteMovieDetailFragment()
     }
 
     override fun onCreateView(
@@ -44,16 +45,15 @@ class MovieDetailFragment : Fragment() {
         if (bundle == null || !bundle.containsKey(MOVIE_OBJECT)) {
             throw IllegalArgumentException("StringList should not be null");
         }
-        val movie = bundle.getParcelable<Movie>(MOVIE_OBJECT)
+        val movie = bundle.getParcelable<FavoriteMovieDb>(MOVIE_OBJECT)
         movie_detail_title.text = movie?.title
-        movie_detail_vote_average.text = movie?.vote_average.toString()
+        movie_detail_vote_average.text = movie?.voteAverage.toString()
         movie_detail_overview.text = movie?.overview
-        movie_detail_release_date.text = movie?.release_date
-        DownloadImageTask(movie_detail_preview).execute(Constant.Api.BASE_POSTER_URL + "w300" + movie?.poster_path)
-        val favoriteMovie = favoriteMovieViewModel.generateFavoriteMovie(movie)
+        movie_detail_release_date.text = movie?.releaseDate
+        DownloadImageTask(movie_detail_preview).execute(Constant.Api.BASE_POSTER_URL + "w300" + movie?.posterPath)
         favoriteMovieViewModel.listenFavoriteResult().observe(viewLifecycleOwner, Observer { data ->
         data?.let {
-            if (it.contains(favoriteMovie)) {
+            if (it.contains(movie)) {
                 movie_add_favorite.visibility = View.GONE
                 movie_remove_favorite.visibility = View.VISIBLE
             } else {
@@ -62,13 +62,13 @@ class MovieDetailFragment : Fragment() {
             }
         }})
         movie_add_favorite.setOnClickListener {
-            if (favoriteMovie != null) {
-                favoriteMovieViewModel.addFavorite(favoriteMovie)
+            if (movie != null) {
+                favoriteMovieViewModel.addFavorite(movie)
             }
         }
         movie_remove_favorite.setOnClickListener {
-            if (favoriteMovie != null) {
-                favoriteMovieViewModel.removeFavorite(favoriteMovie)
+            if (movie != null) {
+                favoriteMovieViewModel.removeFavorite(movie)
             }
         }
     }
