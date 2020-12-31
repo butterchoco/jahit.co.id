@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.opengldiscovery
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -38,9 +38,10 @@ class SplashRender : GLSurfaceView.Renderer {
     }
 
     companion object {
-        fun loadShader(type: Int, shaderCode: String?): Int {
-            val shader = GLES20.glCreateShader(type)
-            GLES20.glShaderSource(shader, shaderCode)
+        @JvmStatic
+        fun loadShader(glVertexShader: Int, vertexShaderCode: String): Int {
+            val shader = GLES20.glCreateShader(glVertexShader)
+            GLES20.glShaderSource(shader, vertexShaderCode)
             GLES20.glCompileShader(shader)
             return shader
         }

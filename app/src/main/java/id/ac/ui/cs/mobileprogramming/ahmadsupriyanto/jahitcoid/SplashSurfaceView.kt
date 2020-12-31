@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.opengldiscovery
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.jahitcoid
 
 import android.content.Context
 import android.opengl.GLSurfaceView
