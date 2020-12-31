@@ -65,7 +65,7 @@ class TextureCube {
         for (face in 0 until numFaces) {
             GLES20.glUniform4fv(colorHandle, 1, colors[face], 0)
             indexBuffer.position(face * 6)
-            GLES20.glDrawElements(GLES20.GL_LINE_STRIP, 6, GLES20.GL_UNSIGNED_SHORT, indexBuffer)
+            GLES20.glDrawElements(GLES20.GL_TRIANGLES, 6, GLES20.GL_UNSIGNED_SHORT, indexBuffer)
         }
         GLES20.glDisableVertexAttribArray(positionHandle)
     }

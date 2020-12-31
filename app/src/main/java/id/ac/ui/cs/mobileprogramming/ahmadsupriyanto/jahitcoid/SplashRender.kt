@@ -13,10 +13,13 @@ class SplashRender : GLSurfaceView.Renderer {
     private val projectionMatrix = FloatArray(16)
     private val viewMatrix = FloatArray(16)
     private val rotationMatrix = FloatArray(16)
+    private lateinit var textureCube: TextureCube
+
     override fun onSurfaceCreated(
         gl: GL10,
         eglConfig: EGLConfig
     ) {
+        textureCube = TextureCube()
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f)
     }
 
@@ -29,6 +32,7 @@ class SplashRender : GLSurfaceView.Renderer {
         Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 90f, -1.0f)
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0)
+        textureCube.draw(scratch)
     }
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
