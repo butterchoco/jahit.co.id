@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.MainActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.MainApp
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.adapter.MovieListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel.MovieViewModelFactory
+import java.util.*
 
 interface OnMovieClickListener {
     fun onMovieClick(it: View);

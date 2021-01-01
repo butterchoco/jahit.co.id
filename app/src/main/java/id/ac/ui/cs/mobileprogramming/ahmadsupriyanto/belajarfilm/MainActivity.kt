@@ -24,11 +24,28 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.youtube.player.*
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var doubleBackToExit: Boolean = false
     lateinit var _mContext: Context
     var isSetView = true
+
+    companion object {
+        // Used to load the 'native-lib' library on application startup.
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
+
+    external fun diffDateFromJNI(jMinuteStart: Int,
+                                 jHourStart: Int,
+                                 jDayStart: Int,
+                                 jMonthStart: Long,
+                                 jyearStart: Long,
+                                 jDayEnd: Int,
+                                 jMonthEnd: Long,
+                                 jyearEnd: Long): Long
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
-        scheduleJob(4000)
+
     }
 
     fun scheduleJob(time: Long) {

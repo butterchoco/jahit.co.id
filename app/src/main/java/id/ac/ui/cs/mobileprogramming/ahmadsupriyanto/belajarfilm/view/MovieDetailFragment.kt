@@ -17,6 +17,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.Favor
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel.MovieViewModelFactory
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
+import java.util.*
 
 class MovieDetailFragment : Fragment() {
 
@@ -82,6 +83,28 @@ class MovieDetailFragment : Fragment() {
 
         movie_add_favorite.setOnClickListener {
             if (favoriteMovie != null) {
+                val releaseDate = favoriteMovie.releaseDate.split("-")
+                val today = Date()
+                val minuteStart = today.minutes
+                val hourStart = today.hours
+                val dayStart = today.date
+                val monthStart: Long = today.month.toLong()
+                val yearStart: Long = today.year.toLong()
+                val dayEnd = releaseDate[2].toInt()
+                val monthEnd: Long = releaseDate[1].toLong()
+                val yearEnd: Long = releaseDate[0].toLong()
+                val diffDate = (activity as MainActivity).diffDateFromJNI(
+                     minuteStart,
+                     hourStart,
+                     dayStart,
+                     monthStart,
+                     yearStart,
+                     dayEnd,
+                     monthEnd,
+                     yearEnd)
+//                val futureDate = Date(121, 0, 2, 15, 40) // 2 Jan 2021
+//                val diffDateTest = futureDate.time - today.time
+                (activity as MainActivity).scheduleJob(diffDate)
                 favoriteMovieViewModel.addFavorite(favoriteMovie)
             }
         }
