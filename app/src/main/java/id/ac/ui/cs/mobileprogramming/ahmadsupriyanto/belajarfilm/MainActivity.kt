@@ -2,10 +2,9 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -37,6 +36,29 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
+        scheduleJob(4000)
+    }
+
+    fun scheduleJob(time: Long) {
+        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        val componentName = ComponentName(this, ReleaseDateTrackJobService::class.java)
+        val info = JobInfo.Builder(123, componentName)
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+            .setPersisted(true)
+            .setOverrideDeadline(time)
+            .setBackoffCriteria(6000, JobInfo.BACKOFF_POLICY_LINEAR)
+            .build()
+        val resultCode = scheduler.schedule(info)
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d("test-----", "Job Scheduled")
+        }
+    }
+
+    fun cancelJob(v: View) {
+        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        scheduler.cancel(123)
+        Log.d("test-----", "Job Cancelled")
     }
 
     override fun onBackPressed() {
