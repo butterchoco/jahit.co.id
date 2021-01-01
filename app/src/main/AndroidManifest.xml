@@ -30,6 +30,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <activity android:name=".YoutubePlayerActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".AddProjectActivity"
             android:parentActivityName=".MainActivity" />

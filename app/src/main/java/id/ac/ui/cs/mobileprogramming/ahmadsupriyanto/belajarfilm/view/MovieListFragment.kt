@@ -15,7 +15,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.R
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.adapter.MovieListAdapter
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModelFactory
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.MovieViewModel.MovieViewModelFactory
 
 interface OnMovieClickListener {
     fun onMovieClick(it: View);

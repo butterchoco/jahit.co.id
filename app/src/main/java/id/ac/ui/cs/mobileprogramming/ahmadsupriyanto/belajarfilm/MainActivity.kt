@@ -11,6 +11,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
@@ -22,15 +23,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.google.android.youtube.player.*
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
 
 class MainActivity : AppCompatActivity() {
     var doubleBackToExit: Boolean = false
     lateinit var _mContext: Context
     var isSetView = true
-    private val RECOVERY_DIALOG_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,34 +119,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             return result
-    }
-
-    fun initYoutubeFragment(youtubeId: String) {
-        third_party_player_view.getPlayerUiController().showFullscreenButton(true)
-        third_party_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
-                val videoId = youtubeId
-                youTubePlayer.cueVideo(videoId, 0f)
-            }
-        })
-
-        third_party_player_view.getPlayerUiController().setFullScreenButtonClickListener(View.OnClickListener {
-            if (third_party_player_view.isFullScreen()) {
-                third_party_player_view.exitFullScreen()
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-                // Show ActionBar
-                if (supportActionBar != null) {
-                    supportActionBar!!.show()
-                }
-            } else {
-                third_party_player_view.enterFullScreen()
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-                // Hide ActionBar
-                if (supportActionBar != null) {
-                    supportActionBar!!.hide()
-                }
-            }
-        })
     }
 
 }
