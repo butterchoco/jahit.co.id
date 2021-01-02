@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.R
 
-class ChatListFragment : Fragment() {
+class AccountFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            ChatListFragment()
+            AccountFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.chat_list_fragment, container, false)
+        return inflater.inflate(R.layout.account_fragment, container, false)
     }
 
 }

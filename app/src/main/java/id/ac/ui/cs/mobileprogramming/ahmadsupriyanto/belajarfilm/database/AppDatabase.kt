@@ -10,7 +10,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.dao.FavoriteMov
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(FavoriteMovieDb::class), version = 2)
+@Database(entities = arrayOf(FavoriteMovieDb::class), version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteMovieDao(): FavoriteMovieDao
 

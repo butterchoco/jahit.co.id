@@ -1,10 +1,14 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlarmManager
+import android.app.AlertDialog
 import android.app.PendingIntent
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.*
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -13,24 +17,21 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.NonNull
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.youtube.player.*
-import kotlinx.android.synthetic.main.movie_detail_fragment.*
-import java.util.*
-import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     var doubleBackToExit: Boolean = false
     lateinit var _mContext: Context
     var isSetView = true
+    val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 111
+    var PROCESS_WAIT = false
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
@@ -52,10 +53,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (checkPermissionACCESS_FINE_LOCATION(this)) {
+            initCreate()
+        }
+        PROCESS_WAIT = true
+    }
+
+    fun initCreate() {
         _mContext = applicationContext
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
+        _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter)
     }
 
     fun scheduleJob(time: Long) {
@@ -86,7 +94,8 @@ class MainActivity : AppCompatActivity() {
             return
         }
         this.doubleBackToExit = true
-        Toast.makeText(this, R.string.double_back_pressed_warning, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,
+            R.string.double_back_pressed_warning, Toast.LENGTH_SHORT).show()
         Handler().postDelayed(Runnable { doubleBackToExit = false }, 2000)
     }
 
@@ -97,7 +106,9 @@ class MainActivity : AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment)
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.navigation_project, R.id.navigation_transaction, R.id.navigation_chat
+                    R.id.navigation_project,
+                    R.id.navigation_transaction,
+                    R.id.navigation_account
                 )
             )
             setSupportActionBar(findViewById(R.id.main_toolbar))
@@ -160,6 +171,76 @@ class MainActivity : AppCompatActivity() {
             }
 
             return result
+    }
+
+    fun showDialog(
+        msg: String, context: Context?,
+        permission: String
+    ) {
+        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+        alertBuilder.setCancelable(true)
+        alertBuilder.setTitle(R.string.permission_ask_title)
+        alertBuilder.setMessage(msg + " " + applicationContext.resources.getString(
+            R.string.permission_ask_content
+        ))
+        alertBuilder.setPositiveButton(
+            R.string.yes,
+            object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    ActivityCompat.requestPermissions(
+                        context as Activity, arrayOf(permission),
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+                    )
+                }
+            })
+        val alert: AlertDialog = alertBuilder.create()
+        alert.show()
+    }
+
+    fun checkPermissionACCESS_FINE_LOCATION(
+        context: Context
+    ): Boolean {
+        val currentAPIVersion = Build.VERSION.SDK_INT
+        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !== PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    showDialog(applicationContext.resources.getString(R.string.access_location_text), context, Manifest.permission.ACCESS_FINE_LOCATION)
+                } else {
+                    ActivityCompat.requestPermissions(context as Activity, arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+                }
+                false
+            } else {
+                true
+            }
+        } else {
+            return true
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (PROCESS_WAIT) {
+                    initCreate()
+                }
+                return;
+            } else {
+                Toast.makeText(
+                    this,
+                    R.string.permission_denied,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> super.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )
+        }
     }
 
 }

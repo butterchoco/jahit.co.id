@@ -9,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.google.android.youtube.player.YouTubePlayerFragment
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.*
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.MainActivity
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.YoutubePlayerActivity
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.FavoriteMovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.FavoriteMovieViewModel.FavoriteMovieViewModelFactory
@@ -56,6 +57,7 @@ class MovieDetailFragment : Fragment() {
         movie_detail_release_date.text = movie?.release_date
         DownloadImageTask(movie_thumbnail).execute(Constant.Api.BASE_POSTER_URL + "w300" + movie?.backdrop_path)
         DownloadImageTask(movie_detail_preview).execute(Constant.Api.BASE_POSTER_URL + "w300" + movie?.poster_path)
+        Log.d("-----test----", movie.toString())
         val favoriteMovie = favoriteMovieViewModel.generateFavoriteMovie(movie)
         favoriteMovieViewModel.listenFavoriteResult().observe(viewLifecycleOwner, Observer { data ->
         data?.let {
@@ -83,7 +85,7 @@ class MovieDetailFragment : Fragment() {
 
         movie_add_favorite.setOnClickListener {
             if (favoriteMovie != null) {
-                val releaseDate = favoriteMovie.releaseDate.split("-")
+                val releaseDate = favoriteMovie.releaseDate?.split("-")
                 val today = Date()
                 val minuteStart: Long = today.minutes.toLong()
                 val hourStart: Long = today.hours.toLong()
@@ -92,9 +94,12 @@ class MovieDetailFragment : Fragment() {
                 val yearStart: Long = today.year.toLong()
                 val minuteEnd: Long = 0
                 val hourEnd: Long = 0
-                val yearEnd: Long = releaseDate[0].toLong()
-                val monthEnd: Long = releaseDate[1].toLong()
-                val dayEnd: Long = releaseDate[2].toLong()
+                val yearEnd: Long = releaseDate?.get(0)?.toLong() ?: 0
+                val monthEnd: Long = releaseDate?.get(1)?.toLong() ?: 0
+                val dayEnd: Long = releaseDate?.get(2)?.toLong() ?: 0
+                if (yearEnd < yearStart) return@setOnClickListener
+                else if (monthEnd < monthStart) return@setOnClickListener
+                else if (dayEnd < dayStart) return@setOnClickListener
                 val diffDate = (activity as MainActivity).diffDateFromJNI(
                     minuteStart, hourStart,
                     dayStart, monthStart, yearStart,

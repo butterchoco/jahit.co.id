@@ -1,7 +1,7 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.opengl
 
 import android.opengl.GLES20
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.SplashRender.Companion.loadShader
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.opengl.SplashRender.Companion.loadShader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -11,12 +11,12 @@ class TextureCube {
     private val vertexBuffer: FloatBuffer
     private val indexBuffer: ShortBuffer
     private val colors = arrayOf(
-        floatArrayOf(1.0f, 0.5f, 0.0f, 1.0f),
-        floatArrayOf(1.0f, 0.0f, 1.0f, 1.0f),
-        floatArrayOf(0.0f, 1.0f, 0.0f, 1.0f),
-        floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f),
-        floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f),
-        floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f)
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f),
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f),
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f),
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f),
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f),
+        floatArrayOf(0.0f, 0.0f, 0.0f, 0.0f)
     )
     var indices = shortArrayOf(
         0, 1, 2, 2,
@@ -65,7 +65,7 @@ class TextureCube {
         for (face in 0 until numFaces) {
             GLES20.glUniform4fv(colorHandle, 1, colors[face], 0)
             indexBuffer.position(face * 6)
-            GLES20.glDrawElements(GLES20.GL_TRIANGLES, 6, GLES20.GL_UNSIGNED_SHORT, indexBuffer)
+            GLES20.glDrawElements(GLES20.GL_LINE_STRIP, 6, GLES20.GL_UNSIGNED_SHORT, indexBuffer)
         }
         GLES20.glDisableVertexAttribArray(positionHandle)
     }

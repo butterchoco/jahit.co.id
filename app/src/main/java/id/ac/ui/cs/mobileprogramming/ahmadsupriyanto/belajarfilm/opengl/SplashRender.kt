@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm
+package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.opengl
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -18,7 +18,8 @@ class SplashRender : GLSurfaceView.Renderer {
         gl: GL10,
         eglConfig: EGLConfig
     ) {
-        textureCube = TextureCube()
+        textureCube =
+            TextureCube()
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f)
     }
 
@@ -27,7 +28,7 @@ class SplashRender : GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
         val time = SystemClock.uptimeMillis() % 4000L
         val angle = 0.090f * time.toInt()
-        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
+        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -5.5f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
         Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 90f, -1.0f)
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0)

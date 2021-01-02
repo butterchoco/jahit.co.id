@@ -73,7 +73,7 @@ class FavoriteMovieListAdapter : ListAdapter<Movie, FavoriteMovieListViewHolder>
                 DownloadImageTask(moviePoster).execute(Constant.Api.BASE_POSTER_URL + "w185" + movie.posterPath)
             }
             movieTitle.text = movie.title
-            movieRating.rating = (movie.voteAverage/2).toFloat()
+            movieRating.rating = (movie.voteAverage?.div(2))?.toFloat() ?: 0F
         }
 
         companion object {

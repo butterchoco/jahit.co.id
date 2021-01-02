@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.FavoriteMovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.repository.FavoriteMovieRepo
@@ -18,6 +19,7 @@ class FavoriteMovieViewModel(private val favoriteMovieRepo: FavoriteMovieRepo) :
     }
 
     fun generateFavoriteMovie(movie: Movie?): FavoriteMovieDb? {
+        Log.d("-----model----", movie.toString())
         if (movie != null) {
             return favoriteMovieRepo.generateFavoriteMovie(
                 movie.id,

@@ -12,18 +12,18 @@ class FavoriteMovieRepo(private val favoriteMovieDao: FavoriteMovieDao) {
 
     fun generateFavoriteMovie(
         id: Int,
-        voteAverage: Double,
-        overview: String,
-        releaseDate: String,
-        title: String,
-        adult: Boolean,
-        backdropPath: String,
-        video: Boolean,
-        originalLanguage: String,
-        originalTitle: String,
-        posterPath: String,
-        popularity: Double,
-        mediaType: String,
+        voteAverage: Double?,
+        overview: String?,
+        releaseDate: String?,
+        title: String?,
+        adult: Boolean?,
+        backdropPath: String?,
+        video: Boolean?,
+        originalLanguage: String?,
+        originalTitle: String?,
+        posterPath: String?,
+        popularity: Double?,
+        mediaType: String?,
         voteCount: Int
     ): FavoriteMovieDb {
         return FavoriteMovieDb(

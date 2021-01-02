@@ -1,32 +1,18 @@
 <resources>
-    <string name="app_name">Jahit</string>
-    <string name="movie_choice_greeting">Welcome to Jahit.co.id</string>
-    <string name="movie_choice_title">What do you want to be in Jahit.co.id?</string>
-    <string name="movie_choice_customer_description">Customer who wants assign a sewing movie</string>
-    <string name="movie_choice_partner_description">Vendor who wants to be Jahit.co.id partner</string>
+    <string name="app_name">BelajarFilm</string>
     <string name="next_button_text">Next</string>
     <string name="movie_list_title">Movie</string>
     <string name="movie_list_no_item_text">There is no available movie at the moment.</string>
-    <string name="movie_add_greeting">Hi, Jahit.co.id Customer!</string>
-    <string name="movie_add_description">Please fill these fields below to be sent to our 2000 vendor and find your best vendor!</string>
-    <string name="movie_add_name_field">Project Name</string>
-    <string name="movie_add_category_field">Category</string>
-    <string name="movie_add_amount_field">Order</string>
-    <string name="movie_add_address_field">Address</string>
-    <string name="movie_add_note_field">Note</string>
-    <string name="movie_add_preview_field">Upload Preview</string>
-    <string name="movie_add_empty_field_message">Please fill out this form!</string>
-    <string name="movie_add_submit_text">Add Project</string>
     <string name="movie_detail_title_overview">Overview</string>
-    <string name="title_movie">Movie</string>
+    <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
-    <string name="title_chat">Chat</string>
+    <string name="title_account">Account</string>
     <string name="double_back_pressed_warning">Press back again to exit</string>
     <string name="movie_add_notification_title">Customer has just added new movie</string>
     <string name="movie_add_notification_content">Let\'s see and make a quotation!</string>
     <string name="yes">Yes</string>
-    <string name="external_storage_text">External Storage</string>
-    <string name="permission_denied">Permission denied. Please grant permission to use storage!</string>
+    <string name="access_location_text">External Storage</string>
+    <string name="permission_denied">Permission denied. Please grant permission to allow application to use gps</string>
     <string name="permission_ask_title">Permission necessary!</string>
     <string name="permission_ask_content">Permission is necessary!</string>
     <string name="internet_connected">Internet Connected !</string>
@@ -35,4 +21,5 @@
     <string name="movie_add_favorite">Add Favorite</string>
     <string name="movie_remove_favorite">Saved</string>
     <string name="internet_not_available">No internet available !</string>
+    <string name="movie_release_now">Your favorite movie is released now !</string>
 </resources>

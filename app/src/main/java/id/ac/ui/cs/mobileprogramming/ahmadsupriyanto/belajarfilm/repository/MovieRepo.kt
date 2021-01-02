@@ -44,7 +44,8 @@ class MovieRepo {
                     result.postValue(null)
                 }
                 override fun onResponse(call: Call<MovieVideos>, response: Response<MovieVideos>) {
-                    result.postValue(response.body()?.results?.get(0))
+                    if (response.body()?.results?.size !== 0) result.postValue(response.body()?.results?.get(0))
+                    else result.postValue(null)
                 }
             }
         )
