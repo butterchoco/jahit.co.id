@@ -56,23 +56,6 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
-
-        val minuteStart: Long = 0
-                val hourStart: Long = 0
-                val dayStart: Long = 31
-                val monthStart: Long = 12
-                val yearStart: Long = 2020
-                val minuteEnd: Long = 0
-                val hourEnd: Long = 0
-                val yearEnd: Long = 2021
-                val monthEnd: Long = 1
-                val dayEnd: Long = 1
-                val diffDate = diffDateFromJNI(
-                    minuteStart, hourStart,
-                    dayStart, monthStart, yearStart,
-                    minuteEnd, hourEnd,
-                    dayEnd, monthEnd, yearEnd)
-                Log.d("test----------",diffDate.toString())
     }
 
     fun scheduleJob(time: Long) {
