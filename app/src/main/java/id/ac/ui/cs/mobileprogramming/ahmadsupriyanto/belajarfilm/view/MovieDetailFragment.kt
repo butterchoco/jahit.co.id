@@ -85,25 +85,21 @@ class MovieDetailFragment : Fragment() {
             if (favoriteMovie != null) {
                 val releaseDate = favoriteMovie.releaseDate.split("-")
                 val today = Date()
-                val minuteStart = today.minutes
-                val hourStart = today.hours
-                val dayStart = today.date
+                val minuteStart: Long = today.minutes.toLong()
+                val hourStart: Long = today.hours.toLong()
+                val dayStart: Long = today.date.toLong()
                 val monthStart: Long = today.month.toLong()
                 val yearStart: Long = today.year.toLong()
-                val dayEnd = releaseDate[2].toInt()
-                val monthEnd: Long = releaseDate[1].toLong()
+                val minuteEnd: Long = 0
+                val hourEnd: Long = 0
                 val yearEnd: Long = releaseDate[0].toLong()
+                val monthEnd: Long = releaseDate[1].toLong()
+                val dayEnd: Long = releaseDate[2].toLong()
                 val diffDate = (activity as MainActivity).diffDateFromJNI(
-                     minuteStart,
-                     hourStart,
-                     dayStart,
-                     monthStart,
-                     yearStart,
-                     dayEnd,
-                     monthEnd,
-                     yearEnd)
-//                val futureDate = Date(121, 0, 2, 15, 40) // 2 Jan 2021
-//                val diffDateTest = futureDate.time - today.time
+                    minuteStart, hourStart,
+                    dayStart, monthStart, yearStart,
+                    minuteEnd, hourEnd,
+                    dayEnd, monthEnd, yearEnd)
                 (activity as MainActivity).scheduleJob(diffDate)
                 favoriteMovieViewModel.addFavorite(favoriteMovie)
             }

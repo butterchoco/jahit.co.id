@@ -25,6 +25,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.youtube.player.*
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
 import java.util.*
+import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     var doubleBackToExit: Boolean = false
@@ -38,12 +39,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    external fun diffDateFromJNI(jMinuteStart: Int,
-                                 jHourStart: Int,
-                                 jDayStart: Int,
+    external fun diffDateFromJNI(jMinuteStart: Long,
+                                 jHourStart: Long,
+                                 jDayStart: Long,
                                  jMonthStart: Long,
                                  jyearStart: Long,
-                                 jDayEnd: Int,
+                                 jMinuteEnd: Long,
+                                 jHourEnd: Long,
+                                 jDayEnd: Long,
                                  jMonthEnd: Long,
                                  jyearEnd: Long): Long
 
@@ -53,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         _mContext.registerReceiver(isInternetAvailableBroadcastReceiver(_mContext), filter);
-
     }
 
     fun scheduleJob(time: Long) {
