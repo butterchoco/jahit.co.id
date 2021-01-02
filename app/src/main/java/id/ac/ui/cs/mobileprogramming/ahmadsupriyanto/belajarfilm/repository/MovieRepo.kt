@@ -6,6 +6,7 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.MovieVideos
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.dao.MovieDao
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.ServiceBuilder
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.TrendingMovieListData
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.UpcomingMovieListData
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Video
 import retrofit2.Call
@@ -13,7 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovieRepo {
-    var listOfMovies: MutableLiveData<List<Movie>> = MutableLiveData()
+    var trendingListOfMovies: MutableLiveData<List<Movie>> = MutableLiveData()
+    var upcomingListOfMovies: MutableLiveData<List<Movie>> = MutableLiveData()
     val retrofit =
         ServiceBuilder.buildService(
             MovieDao::class.java
@@ -23,15 +25,15 @@ class MovieRepo {
         retrofit.getTrendingMovieList(apiKey, "en-US", "images", "en,null").enqueue(
             object : Callback<TrendingMovieListData> {
                 override fun onFailure(call: Call<TrendingMovieListData>, t: Throwable) {
-                    listOfMovies.postValue(null)
+                    trendingListOfMovies.postValue(null)
                 }
                 override fun onResponse(call: Call<TrendingMovieListData>, response: Response<TrendingMovieListData>) {
                     val results = response.body()?.results
-                    listOfMovies.postValue(results)
+                    trendingListOfMovies.postValue(results)
                 }
             }
         )
-        return listOfMovies
+        return trendingListOfMovies
     }
 
     fun getMovieVideos(movieId: String, apiKey: String): MutableLiveData<Video> {
@@ -48,5 +50,20 @@ class MovieRepo {
         )
 
         return result
+    }
+
+    fun getUpcomingMovieList(apiKey: String): MutableLiveData<List<Movie>> {
+        retrofit.getUpComingMovieList(apiKey, "US").enqueue(
+            object : Callback<UpcomingMovieListData> {
+                override fun onFailure(call: Call<UpcomingMovieListData>, t: Throwable) {
+                    upcomingListOfMovies.postValue(null)
+                }
+                override fun onResponse(call: Call<UpcomingMovieListData>, response: Response<UpcomingMovieListData>) {
+                    val results = response.body()?.results
+                    upcomingListOfMovies.postValue(results)
+                }
+            }
+        )
+        return upcomingListOfMovies
     }
 }

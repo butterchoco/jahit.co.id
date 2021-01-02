@@ -23,13 +23,12 @@
             android:layout_marginLeft="@dimen/text_margin"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movie_list_container"
+                android:id="@+id/trending_movie_list_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="72dp" >
+                android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
-                android:id="@+id/movie_list_no_item"
+                android:id="@+id/trending_movie_list_no_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/movie_list_no_item_text"

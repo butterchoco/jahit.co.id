@@ -13,11 +13,11 @@ import com.google.android.material.card.MaterialCardView
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.Constant
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.DownloadImageTask
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.R
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.adapter.MovieListAdapter.MovieListViewHolder
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.adapter.TrendingMovieListAdapter.MovieListViewHolder
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.view.OnMovieClickListener
 
-class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparator()) {
+class TrendingMovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparator()) {
 
     private var movieList: MutableList<Movie> = mutableListOf()
     private lateinit var listener: OnMovieClickListener
@@ -37,7 +37,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         holder.bind(movie)
         holder.itemView.setOnClickListener {
             if (listener != null) {
-                listener.onMovieClick(it)
+                listener.onMovieClick(it, movieList)
             }
         }
     }
@@ -60,10 +60,10 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
     }
 
     class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var movieId:MaterialCardView = itemView.findViewById(R.id.movie_card)
-        private var moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
-        private var movieTitle: TextView = itemView.findViewById(R.id.movie_title)
-        private var movieRating: RatingBar = itemView.findViewById(R.id.movie_rating)
+        private var movieId:MaterialCardView = itemView.findViewById(R.id.trending_movie_card)
+        private var moviePoster: ImageView = itemView.findViewById(R.id.trending_movie_poster)
+        private var movieTitle: TextView = itemView.findViewById(R.id.trending_movie_title)
+        private var movieRating: RatingBar = itemView.findViewById(R.id.trending_movie_rating)
 
         fun bind(movie: Movie) {
             movieId.tag = movie.id
@@ -77,7 +77,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListViewHolder>(MoviesComparato
         companion object {
             fun create(parent: ViewGroup): MovieListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.movie_list_item, parent, false)
+                    .inflate(R.layout.trending_movie_list_item, parent, false)
                 return MovieListViewHolder(view)
             }
         }

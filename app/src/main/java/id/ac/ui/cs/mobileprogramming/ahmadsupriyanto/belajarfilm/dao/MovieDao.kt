@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.dao
 
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.MovieVideos
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.TrendingMovieListData
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.api.UpcomingMovieListData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -12,6 +13,10 @@ interface MovieDao {
     @Headers ("Content-Type: application/json")
     @GET("trending/movie/day")
     fun getTrendingMovieList(@Query("api_key") apiKey: String, @Query("language") language: String, @Query("append_to_response") appendToResponse: String, @Query("include_image_language") includeImageLanguage: String): Call<TrendingMovieListData>
+
+    @Headers ("Content-Type: application/json")
+    @GET("movie/upcoming")
+    fun getUpComingMovieList(@Query("api_key") apiKey: String, @Query("region") region: String): Call<UpcomingMovieListData>
 
     @Headers ("Content-Type: application/json")
     @GET("movie/{movieId}/videos")

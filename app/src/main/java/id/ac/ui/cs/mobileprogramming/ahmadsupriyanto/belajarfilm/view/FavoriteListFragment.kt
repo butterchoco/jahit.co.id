@@ -17,7 +17,10 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Favori
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.FavoriteMovieViewModel
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.viewmodel.FavoriteMovieViewModel.FavoriteMovieViewModelFactory
 
-class FavoriteListFragment : Fragment(), OnMovieClickListener {
+interface OnFavoriteMovieClickListener {
+    fun onMovieClick(it: View, movieList: MutableList<FavoriteMovieDb>);
+}
+class FavoriteListFragment : Fragment(), OnFavoriteMovieClickListener {
     private lateinit var favoriteMovieListAdapter: FavoriteMovieListAdapter
     private val favoriteMovieViewModel: FavoriteMovieViewModel by viewModels {
         FavoriteMovieViewModelFactory((activity?.application as MainApp).favoriteMovieRepository)
@@ -55,7 +58,7 @@ class FavoriteListFragment : Fragment(), OnMovieClickListener {
         return favoriteMovieListView
     }
 
-    override fun onMovieClick(it: View) {
+    override fun onMovieClick(it: View, movieList: MutableList<FavoriteMovieDb>) {
         val movie = favoriteMovieListAdapter.getMovieList().find { data ->
             data.id == it.tag
         }

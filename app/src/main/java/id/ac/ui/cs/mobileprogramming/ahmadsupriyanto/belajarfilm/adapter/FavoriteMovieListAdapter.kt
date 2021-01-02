@@ -17,12 +17,12 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.adapter.Favorit
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.FavoriteMovieDb
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.view.FavoriteListFragment
-import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.view.OnMovieClickListener
+import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.view.OnFavoriteMovieClickListener
 
 class FavoriteMovieListAdapter : ListAdapter<Movie, FavoriteMovieListViewHolder>(MoviesComparator()) {
 
     private var movieList: MutableList<FavoriteMovieDb> = mutableListOf()
-    private lateinit var listener: OnMovieClickListener
+    private lateinit var listener: OnFavoriteMovieClickListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,7 +39,7 @@ class FavoriteMovieListAdapter : ListAdapter<Movie, FavoriteMovieListViewHolder>
         holder.bind(movie)
         holder.itemView.setOnClickListener {
             if (listener != null) {
-                listener.onMovieClick(it)
+                listener.onMovieClick(it, movieList)
             }
         }
     }

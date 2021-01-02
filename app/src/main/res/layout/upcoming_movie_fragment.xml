@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trending"
+            android:text="Upcoming"
             android:fontFamily="@font/raleway_bold"
             android:textSize="24sp"
             android:textColor="@color/black"
@@ -23,13 +23,13 @@
             android:layout_marginLeft="@dimen/text_margin"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movie_list_container"
+                android:id="@+id/upcoming_movie_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="72dp" >
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
-                android:id="@+id/movie_list_no_item"
+                android:id="@+id/upcoming_movie_list_no_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/movie_list_no_item_text"
@@ -38,4 +38,4 @@
                 android:layout_marginTop="32dp"/>
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

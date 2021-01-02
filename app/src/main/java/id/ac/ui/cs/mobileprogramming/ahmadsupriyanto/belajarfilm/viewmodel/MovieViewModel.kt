@@ -9,17 +9,23 @@ import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Movie
 import id.ac.ui.cs.mobileprogramming.ahmadsupriyanto.belajarfilm.database.Video
 
 class MovieViewModel(private val movieRepo: MovieRepo) : ViewModel() {
-    var movieList: MutableLiveData<List<Movie>> = MutableLiveData()
+    private var trendingMovieList: MutableLiveData<List<Movie>> = MutableLiveData()
+    private var upComingMovieList: MutableLiveData<List<Movie>> = MutableLiveData()
     var movieVideo: MutableLiveData<Video> = MutableLiveData()
 
-    fun getMoviesRepository(): MutableLiveData<List<Movie>> {
-        movieList = movieRepo.getTrendingMovieList(Constant.Api.API_KEY)
-        return movieList
+    fun getTrendingMoviesRepository(): MutableLiveData<List<Movie>> {
+        trendingMovieList = movieRepo.getTrendingMovieList(Constant.Api.API_KEY)
+        return trendingMovieList
     }
 
     fun getMovieVideos(movieId: String): MutableLiveData<Video> {
         movieVideo = movieRepo.getMovieVideos(movieId, Constant.Api.API_KEY)
         return movieVideo
+    }
+
+    fun getUpComingMoviesRepository(): MutableLiveData<List<Movie>> {
+        upComingMovieList = movieRepo.getUpcomingMovieList(Constant.Api.API_KEY)
+        return upComingMovieList
     }
 
     class MovieViewModelFactory(private val repository: MovieRepo) : ViewModelProvider.Factory {
